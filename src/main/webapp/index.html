@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>საინფორმაციო სისტემა</title>
+    <script type="text/javascript">
+        if (!localStorage) {
+            localStorage = {};
+            localStorage.getItem = function () {
+            };
+            localStorage.setItem = function () {
+            };
+        }
+        var theme = localStorage.getItem('theme');
+        theme = theme || '-classic';
+        //        ext-5.0.1-gpl/ext-5.0.1
+
+        document.write('<link rel="stylesheet" type="text/css" href="http://portal.eqe.ge/lib/ext-5.0.1-gpl/ext-5.0.1/build/packages/ext-theme' + theme + '/build/resources/ext-theme' + theme +
+                       '-all.css" />');
+    </script>
+    <!--<link rel="stylesheet" type="text/css" href="http://portal.eqe.ge/lib/ext-4.2.1-gpl/ext-4.2.1.883/resources/css/ext-all.css">-->
+
+    <link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!--<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <link href="css/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+    <script type="text/javascript" src="http://portal.eqe.ge/lib/tinymce/4.1.5/tinymce/tinymce.min.js"></script>
+    <!--<script type="text/javascript" src="http://localhost/extjs/ext-5.0.1/build/ext-all.js"></script>-->
+    <script type="text/javascript" src="http://portal.eqe.ge/lib/ext-5.0.1-gpl/ext-5.0.1/build/ext-all.js"></script>
+    <script src="./js/ext-locale-ka_GE.js"></script>
+
+    <script type="text/javascript" src="./js/functions.js"></script>
+    <script type="text/javascript" src="./js/defines.js"></script>
+    <script type="text/javascript" src="./js/overrides.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+</head>
+<body>
+
+
+</body>
+</html>
