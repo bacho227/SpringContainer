@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
-        List<AuthenticationProvider> authenticationProviderList = new ArrayList<AuthenticationProvider>();
+        List<AuthenticationProvider> authenticationProviderList = new ArrayList<>();
         authenticationProviderList.add(customAuthenticationProvider());
         AuthenticationManager authenticationManager = new ProviderManager(authenticationProviderList);
         return authenticationManager;
@@ -62,12 +62,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/login").anonymous()
-//                .antMatchers("/rest/**").permitAll()
-//                .antMatchers("/js/**").permitAll()
-//                .antMatchers("/css/**").permitAll()
+                .antMatchers("/login.jsp").anonymous()
+                .antMatchers("/rest/**").permitAll()
                 .anyRequest().hasRole("USER")
-                .and().formLogin().loginPage("/login").failureUrl("/login?auth=fail")
+//                .antMatchers("/rest/**").hasRole("USER")
+//                .antMatchers("/js/**").hasRole("USER")
+//                .antMatchers("/css/**").hasRole("USER")
+                .and().formLogin().loginPage("/login.jsp").failureUrl("/login.jsp?auth=fail")
                 .loginProcessingUrl("/loginProcess").passwordParameter("password").usernameParameter("username").defaultSuccessUrl("/")
                 .permitAll().and().httpBasic().and().logout()
                 .logoutSuccessUrl("/login").and().csrf().disable()

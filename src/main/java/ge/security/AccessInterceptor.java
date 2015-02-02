@@ -18,10 +18,10 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println(">>>>>>>>>>>.");
         if (!handler.getClass().equals(HandlerMethod.class))
             return super.preHandle(request, response, handler);
-        response.setCharacterEncoding("UTF-8");
+
+//        response.setCharacterEncoding("UTF-8");
         HandlerMethod method = (HandlerMethod) handler;
         Class<?> cls = method.getBeanType();
 //        DirectLink directLink = method.getMethodAnnotation(DirectLink.class);
@@ -31,7 +31,6 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
             return super.preHandle(request, response, handler);
 
         User user = checkAuthorization(response);
-
         if (user == null || !checkAccesses(cls, request, response, method)) {
             return false;
         }

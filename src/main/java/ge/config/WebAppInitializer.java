@@ -20,7 +20,7 @@ import org.springframework.web.servlet.DispatcherServlet;
 public class WebAppInitializer implements WebApplicationInitializer {
 
     private static final String DISPATCHER_SERVLET_NAME = "spring-mvc";
-    private static final String DISPATCHER_SERVLET_MAPPING = "/";
+    private static final String DISPATCHER_SERVLET_MAPPING = "/rest/*";
 
     @Override
     public void onStartup(ServletContext servletContext)
@@ -29,12 +29,11 @@ public class WebAppInitializer implements WebApplicationInitializer {
         appContext.register(RootConfig.class);
 
         AnnotationConfigWebApplicationContext mvcConfig = new AnnotationConfigWebApplicationContext();
-        mvcConfig.register(ServletConfig.class, SecurityConfig.class);
+//        mvcConfig.register(ServletConfig.class, SecurityConfig.class);
 
-        ServletRegistration.Dynamic springmvc = servletContext.addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(mvcConfig));
-        springmvc.setLoadOnStartup(1);
-        springmvc.addMapping(DISPATCHER_SERVLET_MAPPING);
-
+        ServletRegistration.Dynamic springMvc = servletContext.addServlet(DISPATCHER_SERVLET_NAME, new DispatcherServlet(mvcConfig));
+        springMvc.setLoadOnStartup(1);
+        springMvc.addMapping(DISPATCHER_SERVLET_MAPPING);
         EnumSet<DispatcherType> dispatcherTypes = EnumSet.of(DispatcherType.REQUEST, DispatcherType.FORWARD);
 
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();

@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Login Page</title>
+    <title>ავტორიზაცია</title>
 </head>
 <body>
-<h2>Custom Form based Login Page</h2>
 <c:if test="${"fail" eq param.auth}">
     <div style="color:red">
         Login Failed!!!<br/>
@@ -21,10 +20,6 @@
         <tr>
             <td>Password:</td>
             <td><input type='password' name='password'></td>
-        </tr>
-        <tr>
-            <td>dg number:</td>
-            <td><input type='text' name='dgNum'></td>
         </tr>
         <tr>
             <td colspan='2'><input name="submit" type="submit" value="Submit"></td>

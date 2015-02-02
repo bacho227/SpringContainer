@@ -6,12 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * User will be supplied from this class.
- * User class implements Spring-Security UserDetails interface for custom authentication feature
- *
- * @author aakin
- */
+
 public class User implements UserDetails {
     private static final long serialVersionUID = 1L;
 

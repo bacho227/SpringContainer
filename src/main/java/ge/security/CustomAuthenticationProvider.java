@@ -40,8 +40,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 //            throw new BadCredentialsException("Wrong dgNum!");
 //        }
         List<Role> roles = new ArrayList<>();
-        roles.add(new Role("ROLE_USER", 1));
-        return new UsernamePasswordAuthenticationToken(user, password, roles);
+//        roles.add(new Role("ROLE_USER", 1));
+        return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
     }
 
     @Override

@@ -23,9 +23,9 @@ public class UserManager {
     }
 
     private static void loadRolesToUser(User user) {
-        List<Role> roles = new ArrayList<Role>();
+        List<Role> roles = new ArrayList<>();
         //TODO custom select here for roles
-        roles.add(new Role("USER", 1));
+        roles.add(new Role("ROLE_USER", 1));
         roles.add(new Role("ROLE_ADMIN", 2));
         user.setAuthorities(roles);
     }
