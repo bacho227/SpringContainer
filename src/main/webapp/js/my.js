@@ -1,5 +1,8 @@
 var le = le || {};
+var loc = loc || {};
+var lang = 'ka';
 loadExtCss();
+loadLocale();
 //window.localStorage = window.localStorage || {};
 
 // loadExtCss();
@@ -245,6 +248,13 @@ function dateToISOFormat(str){
 	return str.substr(6) + '-' + str.substr(3, 2) + '-' + str.substr(0, 2);
 }
 
+function loadLocale(){
+    lang = localStorage.lang || 'ka';
+    var url = './js/locale/' + lang + '.js';
+    if(lang == 'ka') Ext.Loader.loadScript('./js/ext-locale-ka_GE.js');
+
+    Ext.Loader.loadScript(url);
+}
 
 function userLogout(){
 	myRequest({
@@ -268,3 +278,61 @@ function logout(){
 	if(window.admin) adminLogout();
 	else userLogout();
 }
+
+function changeTheme(theme){
+    localStorage.theme = theme;
+    Ext.Msg.confirm(loc.warning, loc.refreshWarning, function(ans){
+        if(ans == 'yes'){
+            location.reload();
+        }
+    });
+}
+
+function changeLang(lang){
+    localStorage.lang = lang;
+    Ext.Msg.confirm(loc.warning, loc.refreshWarning, function(ans){
+        if(ans == 'yes'){
+            location.reload();
+        }
+    });
+}
+
+// glyphs (icons)
+window.g = {
+    get: function (name) {
+        return 'x' + name + '@FontAwesome';
+    },
+    edit: 'f044',
+    history: 'f1da',
+    back: 'f060',
+    print: 'f02f',
+    details: 'f013',
+    groups: 'f0c0',
+    documents: 'f1c6',
+    'plus-circle': 'f055',
+    file: 'f15b',
+    save: 'f0c7',
+    'chevron-circle-down': 'f13a',
+    remove: 'f00d',
+    'remove-circle': 'f00d',
+    university: 'f19c',
+    list: 'f03a',
+    gears: 'f085',
+    close: 'f00d',
+    'check-circle': 'f058',
+    'check': 'f00c',
+    bell: 'f0f3',
+    'thumbs-up': 'f164',
+    'bar-chart': 'f080',
+    tasks: 'f0ae',
+    search: 'f002',
+    refresh: 'f021',
+    user: 'f007',
+    'folder-open': 'f07c',
+    'file-text': 'f15c',
+    send: 'f1d8',
+    eye: 'f06e',
+    clients: 'f0c0',
+    loans: 'f0d6',
+    card: 'f09d'
+};

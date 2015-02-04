@@ -15,19 +15,19 @@ Ext.define('LE.view.MenuPanel', {
                 textAlign: 'left'
             },
             items: [{
-                text: 'Clients',
-                glyph: 'xf0c0@FontAwesome'
+                text: loc.clients,
+                glyph: g.get(g.clients)
             }, {
-                text: 'Loans',
-                glyph: 'xf0d6@FontAwesome',
+                text: loc.loans,
+                glyph: g.get(g.loans),
                 menu: [{
-                    glyph: 'xf09d@FontAwesome',
+                    glyph: g.get(g.card),
                     text: 'item 3'
                 }, {
                     text: 'item 4'
                 }]
             }, {
-                glyph: 'xf09d@FontAwesome',
+                glyph: g.get(g.card),
                 text: 'item 5'
             }, {
                 text: 'item 6'
