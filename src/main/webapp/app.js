@@ -9,17 +9,10 @@ Ext.application({
 	appFolder: 'app',
 	launch: function(){
 		
-		var viewport = Ext.create('Ext.container.Viewport', {
+		Ext.create('Ext.container.Viewport', {
 			layout: 'fit',
-			items: [ ]
+			items: [ Ext.create('LE.view.MainPanel') ]
 		});
-		
-		if(le.login){
-			viewport.add(Ext.create('CERT.view.LoginPanel'));
-			showIEWarning();
-			//viewport.add(Ext.create('CERT.view.MainPanel'));
-		} else {
-			viewport.add(Ext.create('LE.view.MainPanel'));
-		}
+
 	}
 });
