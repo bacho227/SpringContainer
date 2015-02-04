@@ -26,7 +26,7 @@ public class ApplicationController {
 		return user;
 	}
 
-	@Access("ADMIN")
+	@Access("ADMINa")
 	@RequestMapping(value = "test1")
 	@ResponseBody
 	public String test1(User user) {

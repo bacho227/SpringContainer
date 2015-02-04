@@ -4,18 +4,11 @@ classpath
 .classpath
 project
 .project
-.htaccess
-#lasha
-qms.iml
+
+*.iml
 .idea
 .swp
 .swo
 hibernate.
-.hgignore
-target\m2e-wtp\web-resources\META-INF\maven\ge.emis\qms\pom.properties
 Makefile
 *.swp
-
-#sandro
-syntax: glob
-*~

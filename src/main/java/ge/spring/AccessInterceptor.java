@@ -29,7 +29,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 			return super.preHandle(request, response, handler);
 
 		User user = checkAuthorization(response);
-		if (user == null || !checkAccesses(cls, request, response, method)) {
+		if (user == null || !checkAccesses(cls, request, response, method, user)) {
 			return false;
 		}
 		return super.preHandle(request, response, handler);
@@ -46,28 +46,25 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	private boolean checkAccesses(Class<?> cls, HttpServletRequest request, HttpServletResponse response,
-								  HandlerMethod method) throws IOException {
+								  HandlerMethod method, User user) throws IOException {
 		boolean flag = true;
-
-		AnyAccess anyAccess = null;
-		Access access = null;
-
-		access = cls.getAnnotation(Access.class);
+		AnyAccess anyAccess;
+		Access access = cls.getAnnotation(Access.class);
 		if (access != null)
-			flag = checkAccess(access, request);
+			flag = checkAccess(access, user);
 
 		access = method.getMethodAnnotation(Access.class);
 		if (access != null)
-			flag = flag && checkAccess(access, request);
+			flag = flag && checkAccess(access, user);
 
 		if (flag) {
 			anyAccess = cls.getAnnotation(AnyAccess.class);
 			if (anyAccess != null)
-				flag = checkAnyAccess(anyAccess.value(), request);
+				flag = checkAnyAccess(anyAccess.value(), user);
 
 			anyAccess = method.getMethodAnnotation(AnyAccess.class);
 			if (anyAccess != null)
-				flag = flag && checkAnyAccess(anyAccess.value(), request);
+				flag = flag && checkAnyAccess(anyAccess.value(), user);
 		}
 
 		if (!flag) {
@@ -78,29 +75,29 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 		return flag;
 	}
 
-	private boolean checkAnyAccess(Access[] accesses, HttpServletRequest request) throws IOException {
+	private boolean checkAnyAccess(Access[] accesses, User user) throws IOException {
 		for (Access access : accesses) {
-			if (checkAccess(access, request)) {
+			if (checkAccess(access, user)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private boolean checkAccess(Access access, HttpServletRequest request) throws IOException {
-		String[] roles = null;
+	private boolean checkAccess(Access access, User user) throws IOException {
+		String[] permissionNames = null;
 		if (access != null)
-			roles = access.value();
-		if (roles != null && roles.length > 0 && !checkRole(request, roles)) {
+            permissionNames = access.value();
+		if (permissionNames != null && permissionNames.length > 0 && !checkRole(user, permissionNames)) {
 			return false;
 		}
 		return true;
 	}
 
-	private boolean checkRole(HttpServletRequest request, String[] roles) {
-		for (String role : roles) {
-			if (!request.isUserInRole(role))
-				return false;
+	private boolean checkRole(User user, String[] permissionNames) {
+		for (String role : permissionNames) {
+			if (!user.hasPermission(role))
+                return false;
 		}
 		return true;
 	}

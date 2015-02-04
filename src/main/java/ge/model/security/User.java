@@ -1,7 +1,9 @@
 package ge.model.security;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 public class User implements Serializable {
@@ -18,6 +20,12 @@ public class User implements Serializable {
 	private boolean accountIsLocked = false;
 	private boolean enabled = true;
 	private String message;
+
+    private Set<String> permissionsSet = new HashSet<>();
+
+    public boolean hasPermission(String permissionName){
+        return permissionsSet.contains(permissionName);
+    }
 
 	public Integer getUserId() {
 		return userId;
@@ -73,6 +81,9 @@ public class User implements Serializable {
 
 	public void setPermissions(List<Permission> permissions) {
 		this.permissions = permissions;
+        for(Permission permission : permissions){
+            this.permissionsSet.add(permission.getName());
+        }
 	}
 
 	public boolean isAccountIsLocked() {
