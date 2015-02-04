@@ -2,6 +2,7 @@ package ge.config;
 
 import ge.security.CustomAuthenticationFilter;
 import ge.security.CustomAuthenticationProvider;
+import ge.security.CustomSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -29,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             throws Exception {
         CustomAuthenticationFilter customUsernamePasswordAuthenticationFilter = new CustomAuthenticationFilter();
         customUsernamePasswordAuthenticationFilter.setAuthenticationManager(authenticationManagerBean());
-//        customUsernamePasswordAuthenticationFilter.setAuthenticationSuccessHandler(customSuccessHandler());
+        customUsernamePasswordAuthenticationFilter.setAuthenticationSuccessHandler(customSuccessHandler());
         return customUsernamePasswordAuthenticationFilter;
     }
 
@@ -41,11 +42,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         AuthenticationManager authenticationManager = new ProviderManager(authenticationProviderList);
         return authenticationManager;
     }
-//    @Bean
-//    public CustomSuccessHandler customSuccessHandler() {
-//        CustomSuccessHandler customSuccessHandler = new CustomSuccessHandler();
-//        return customSuccessHandler;
-//    }
+
+    @Bean
+    public CustomSuccessHandler customSuccessHandler() {
+        CustomSuccessHandler customSuccessHandler = new CustomSuccessHandler();
+        return customSuccessHandler;
+    }
 
     @Bean
     public CustomAuthenticationProvider customAuthenticationProvider() {

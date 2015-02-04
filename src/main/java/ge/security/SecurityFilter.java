@@ -22,7 +22,7 @@ public class SecurityFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
                          FilterChain filterChain) throws IOException, ServletException {
         if (!(request instanceof HttpServletRequest)) return;
-
+        System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
         HttpServletRequest hrequest = ((HttpServletRequest) request);
 
         String url = hrequest.getRequestURL().toString();
