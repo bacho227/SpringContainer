@@ -40,6 +40,7 @@ public class SecurityFilter implements Filter {
             if (isRequest == false)
                 ((HttpServletResponse) response).sendRedirect("logon.html");
         } else {
+            
             filterChain.doFilter(request, response);
         }
     }

@@ -48,6 +48,8 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(accessInterceptor);
     }
 
+
+    
     @Override
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
         argumentResolvers.add(new UserArgumentResolver());

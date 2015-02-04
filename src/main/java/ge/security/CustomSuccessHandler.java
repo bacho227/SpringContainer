@@ -33,6 +33,8 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
             return;
         }
 
+
+
         redirectStrategy.sendRedirect(request, response, targetUrl);
     }
 
