@@ -118,7 +118,7 @@ Ext.define('Ext.grid.Panel', {
 
 function loadExtCss() {
 	var theme = localStorage.theme || 'neptune';
-	loadCss("./js/ext-5.1.0/build/packages/ext-theme-" + theme + "/build/resources/ext-theme-" + theme + "-all.css");
+	loadCss("http://localhost/ext-5.1.0/build/packages/ext-theme-" + theme + "/build/resources/ext-theme-" + theme + "-all.css");
 	//if (theme === 'ext-all-neptune')
 	//	loadCss('./css/neptune.css');
 	//else
