@@ -17,16 +17,16 @@ import javax.servlet.http.HttpSession;
  * Created by bacho on 2/2/15.
  */
 @Controller
-@RequestMapping(value = "/")
+@RequestMapping(value = "/security/")
 public class ApplicationController {
 
-	@RequestMapping(value = "test")
+	@RequestMapping(value = "getUser")
 	@ResponseBody
-	public User test(User user) {
+	public User getUser(User user) {
 		return user;
 	}
 
-	@Access("ADMINa")
+	@Access("ADMINa") // აქ a უნდა ეწეროს?
 	@RequestMapping(value = "test1")
 	@ResponseBody
 	public String test1(User user) {
@@ -43,12 +43,12 @@ public class ApplicationController {
 				user.setPassword(null);
 				HttpSession session = SessionUtils.getSession();
 				session.setAttribute(SessionUtils.SESSION_DATA_KEY, user);
-				user.setMessage("Sign In Successful!");
+				user.setMessage("SUCCESSFUL");
 			} else {
-				user.setMessage("Password is incorrect!");
+				user.setMessage("BAD_PASSWORD");
 			}
 		} else {
-			user.setMessage("User Not Found!");
+			user.setMessage("BAD_USER");
 		}
 		return user;
 	}

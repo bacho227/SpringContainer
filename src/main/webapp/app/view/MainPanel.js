@@ -6,6 +6,7 @@ Ext.define('LE.view.MainPanel', {
         split: true
     },
     constructor: function(cfg){
+        cfg = cfg || {};
         var me = this;
 
         var header = Ext.create('LE.view.Header', {

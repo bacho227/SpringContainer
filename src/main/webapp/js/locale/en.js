@@ -18,6 +18,7 @@ var loc = {
 };
 
 loc.login = {
+    authorization: 'Authorization',
     username : 'Username',
     password : 'Password',
     login : 'Login'

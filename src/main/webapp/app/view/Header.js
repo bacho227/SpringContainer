@@ -3,6 +3,7 @@ Ext.define('LE.view.Header', {
     border: false,
     bodyPadding: 5,
     constructor: function (cfg) {
+        cfg = cfg || {};
         var me = this;
 
         var ka = Ext.create('Ext.button.Button', {

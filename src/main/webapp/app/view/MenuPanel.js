@@ -3,6 +3,7 @@ Ext.define('LE.view.MenuPanel', {
     border: false,
     //title: 'Menu',
     constructor: function (cfg) {
+        cfg = cfg || {};
         var me = this;
 
         var menu = Ext.create('Ext.button.Segmented', {

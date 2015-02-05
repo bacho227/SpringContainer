@@ -17,6 +17,7 @@ var loc = {
 };
 
 loc.login = {
+    authorization: 'ავტორიზაცია',
     username : 'მომხმარებელი',
     password : 'პაროლი',
     login : 'შესვლა'

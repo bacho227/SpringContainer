@@ -1,23 +1,24 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ავტორიზაცია</title>
+	<title>ავტორიზაცია</title>
 </head>
 <body>
-<form action="rest/signIn" method="POST">
-    <table>
-        <tr>
-            <td>Username:</td>
-            <td><input type='text' name='username'/></td>
-        </tr>
-        <tr>
-            <td>Password:</td>
-            <td><input type='password' name='password'></td>
-        </tr>
-        <tr>
-            <td colspan='2'><input name="submit" type="submit" value="Sign In"></td>
-        </tr>
-    </table>
+<form action="rest/security/signIn" method="POST">
+	<table>
+		<tr>
+			<td>Username:</td>
+			<td><input type='text' name='username'/></td>
+		</tr>
+		<tr>
+			<td>Password:</td>
+			<td><input type='password' name='password'></td>
+		</tr>
+		<tr>
+			<td colspan='2'><input name="submit" type="submit" value="Sign In"></td>
+		</tr>
+	</table>
 </form>
 </body>
 </html>

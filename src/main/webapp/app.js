@@ -11,7 +11,7 @@ Ext.application({
 		
 		Ext.create('Ext.container.Viewport', {
 			layout: 'fit',
-			items: [ Ext.create('LE.view.MainPanel') ]
+			items: [ window.login ? Ext.create('LE.view.LoginPanel') : Ext.create('LE.view.MainPanel') ]
 		});
 
 	}
