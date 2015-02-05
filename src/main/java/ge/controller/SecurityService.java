@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping(value = "/security/")
-public class ApplicationController {
+public class SecurityService {
 
 	@RequestMapping(value = "getUser")
 	@ResponseBody
