@@ -9,18 +9,18 @@
 	<script type="text/javascript" src="./js/my.js"></script>
 </head>
 <body>
-<form class="login-form" action="rest/security/signIn" method="POST">
+<form class="login-form" action="rest/security/signIn" method="POST" onsubmit="return login(this);">
 	<table>
 		<tr>
 			<td>Username:</td>
-			<td><input type="text" name="username"/></td>
+			<td><input type="text" name="username" required/></td>
 		</tr>
 		<tr>
 			<td>Password:</td>
-			<td><input type="password" name="password"></td>
+			<td><input type="password" name="password" required></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input name="submit" type="submit" value="Sign In"></td>
+			<td colspan="2" style="text-align: right;"><input name="submit" type="submit" value="Sign In"></td>
 		</tr>
 	</table>
 </form>

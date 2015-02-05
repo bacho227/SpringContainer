@@ -41,7 +41,10 @@ Ext.define('LE.view.Header', {
         me.items = [ {
             xtype: 'label',
             html: '<strong>Loan Expert System</strong>'
-        }, '->', ka, en, '-', themeCombo ];
+        }, '->', ka, en, '-', themeCombo, {
+            text: loc.logout,
+            handler: logout
+        } ];
 
         me.callParent(arguments);
     }

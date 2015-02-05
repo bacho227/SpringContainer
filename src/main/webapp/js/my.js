@@ -119,6 +119,40 @@ Ext.define('Ext.grid.Panel', {
 
 // end overrides //
 
+function login(form){
+    myRequest({
+        url: 'rest/security/signIn',
+        params: {
+            username: form.elements.username.value,
+            password: form.elements.password.value
+        },
+        callback: function(user){
+            var msg = '';
+            switch (user.message) {
+                case "SUCCESSFUL":
+                    sessionStorage.leUserName = user.username;
+                    sessionStorage.leFullName = user.firstName + ' ' + user.lastName;
+                    location.href = "index.html";
+                    break;
+                case "EMPTY_USER_PASSWORD":
+                    msg = 'მიუთითეთ პაროლი';
+                    break;
+                case "BAD_USER":
+                    msg = 'ასეთი მომხმარებელი არ არსებობს! გთხოვთ გაიაროთ რეგისტრაცია!';
+                    break;
+                case "BAD_PASSWORD":
+                    msg = 'არასწორი პაროლი';
+                    break;
+            }
+            if (msg) {
+                Ext.Msg.alert(loc.error, msg);
+            }
+            log(user);
+        }
+    });
+    return false;
+}
+
 function loadExtCss() {
 	var theme = localStorage.theme || 'neptune';
 	loadCss("http://localhost/ext-5.1.0/build/packages/ext-theme-" + theme + "/build/resources/ext-theme-" + theme + "-all.css");
@@ -258,7 +292,7 @@ function loadLocale(){
 
 function userLogout(){
 	myRequest({
-		url : 'rest/security/signout',
+		url : 'rest/security/signOut',
 		callback : function() {
 			location.href = 'login.html';
 		}
