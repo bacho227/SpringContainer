@@ -9,10 +9,16 @@ Ext.application({
 	appFolder: 'app',
 	launch: function(){
 		
-		Ext.create('Ext.container.Viewport', {
-			layout: 'fit',
-			items: [ Ext.create('LE.view.MainPanel') ]
+		var viewport = Ext.create('Ext.container.Viewport', {
+			layout: 'fit'
 		});
 
+        myRequest({
+            url: 'rest/security/getUser',
+            callback: function(user){
+                le.user = user;
+                viewport.add(Ext.create('LE.view.MainPanel'));
+            }
+        });
 	}
 });

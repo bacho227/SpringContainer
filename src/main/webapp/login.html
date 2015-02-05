@@ -13,16 +13,19 @@
 	<table>
 		<tr>
 			<td>Username:</td>
-			<td><input type="text" name="username" required/></td>
+			<td><input type="text" name="username" required value="test"/></td>
 		</tr>
 		<tr>
 			<td>Password:</td>
-			<td><input type="password" name="password" required></td>
+			<td><input type="password" name="password" required value="test"></td>
 		</tr>
 		<tr>
 			<td colspan="2" style="text-align: right;"><input name="submit" type="submit" value="Sign In"></td>
 		</tr>
 	</table>
 </form>
+<script>
+	login(Ext.query('form')[0]);
+</script>
 </body>
 </html>

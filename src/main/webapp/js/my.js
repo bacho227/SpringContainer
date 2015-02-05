@@ -3,6 +3,8 @@ var loc = loc || {};
 var lang = 'ka';
 loadExtCss();
 loadLocale();
+
+
 //window.localStorage = window.localStorage || {};
 
 // loadExtCss();
@@ -29,96 +31,6 @@ if (!document.all) {
 	});
 }
 
-// overrides //
-var str = 'Ext.form.field.Text';
-
-redefineFields('Ext.form.field.Text');
-redefineFields('Ext.form.field.ComboBox');
-redefineFields('Ext.form.field.TextArea');
-
-function redefineFields(className) {
-	Ext.define(className, {
-		override : className,
-		constructor : function(cfg) {
-			cfg = cfg || {};
-			var me = this;
-			var isEng = cfg.isEng || me.isEng;
-			var autoFocus = cfg.autoFocus || me.autoFocus;
-			me.callParent(arguments);
-
-			me.on({
-				focus : function() {
-					if(window.geokb) geokb.toggle(!isEng);
-				}
-			});
-			if(autoFocus){
-				me.on('afterrender', function(f){
-					setTimeout(function(){
-						f.focus();
-					}, 300);
-				});
-			}
-
-		}
-	});
-}
-
-Ext.define('Ext.window.Window', {
-	override: 'Ext.window.Window',
-	constrain: true
-});
-
-Ext.define('Ext.form.Panel', {
-	override : 'Ext.form.Panel',
-	constructor : function(cfg) {
-		cfg = cfg || {};
-		var me = this;
-
-		var fn = cfg.submitFn || me.submitFn;
-
-		me.callParent(arguments);
-
-		if (typeof fn === 'function') {
-			me.addListener('afterrender', function() {
-				me.keyNav = Ext.create('Ext.util.KeyNav', me.el, {
-					enter : function(e) {
-						if (me.getForm().isValid()) fn();
-					}
-				});
-			});
-		}
-	}
-});
-
-Ext.define('Ext.grid.Panel', {
-	override : 'Ext.grid.Panel',
-	constructor : function(cfg) {
-		cfg = cfg || {};
-		var me = this;
-		var countLabel = null;
-
-		if (cfg.footer || me.footer) {
-			countLabel = Ext.create('Ext.form.Label');
-
-			me.bbar = [ {
-				xtype : 'label',
-				html : 'სულ: '
-			}, countLabel ];
-		}
-
-		me.callParent(arguments);
-
-		if (cfg.footer || me.footer) {
-			me.getStore().on('datachanged', function() {
-				var count = Math.max(me.getStore().getTotalCount(), me.getStore().getCount());
-				countLabel.update(count.toString());
-			});
-		}
-	}
-});
-
-// end overrides //
-
 function login(form){
     myRequest({
         url: 'rest/security/signIn',
@@ -127,11 +39,12 @@ function login(form){
             password: form.elements.password.value
         },
         callback: function(user){
+            le.user = user;
             var msg = '';
             switch (user.message) {
                 case "SUCCESSFUL":
-                    sessionStorage.leUserName = user.username;
-                    sessionStorage.leFullName = user.firstName + ' ' + user.lastName;
+                    localStorage.leUserName = user.username;
+                    //localStorage.leFullName = user.firstName + ' ' + user.lastName;
                     location.href = "index.html";
                     break;
                 case "EMPTY_USER_PASSWORD":
@@ -172,6 +85,8 @@ function loadCss(url) {
 	// document.getElementsByTagName('head')[0].appendChild(link);
 	document.write(link);
 }
+
+
 
 function monitorEvents(obj) {
 	Ext.util.Observable.capture(obj, function(evname, args) {
@@ -336,6 +251,7 @@ window.g = {
     get: function (name) {
         return 'x' + name + '@FontAwesome';
     },
+    user: 'f007',
     edit: 'f044',
     history: 'f1da',
     back: 'f060',
@@ -343,30 +259,32 @@ window.g = {
     details: 'f013',
     groups: 'f0c0',
     documents: 'f1c6',
-    'plus-circle': 'f055',
+    plusCircle: 'f055',
     file: 'f15b',
     save: 'f0c7',
-    'chevron-circle-down': 'f13a',
+    chevronCircleDown: 'f13a',
     remove: 'f00d',
-    'remove-circle': 'f00d',
+    removeCircle: 'f00d',
     university: 'f19c',
     list: 'f03a',
     gears: 'f085',
     close: 'f00d',
-    'check-circle': 'f058',
-    'check': 'f00c',
+    checkCircle: 'f058',
+    check: 'f00c',
     bell: 'f0f3',
-    'thumbs-up': 'f164',
-    'bar-chart': 'f080',
+    thumbsUp: 'f164',
+    barChart: 'f080',
     tasks: 'f0ae',
     search: 'f002',
     refresh: 'f021',
     user: 'f007',
-    'folder-open': 'f07c',
-    'file-text': 'f15c',
+    folderOpen: 'f07c',
+    fileText: 'f15c',
     send: 'f1d8',
     eye: 'f06e',
     clients: 'f0c0',
     loans: 'f0d6',
-    card: 'f09d'
+    card: 'f09d',
+    logout: 'f08b',
+    brush: 'f1fc'
 };
