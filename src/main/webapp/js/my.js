@@ -86,8 +86,6 @@ function loadCss(url) {
 	document.write(link);
 }
 
-
-
 function monitorEvents(obj) {
 	Ext.util.Observable.capture(obj, function(evname, args) {
 		log(evname, [ args ]);

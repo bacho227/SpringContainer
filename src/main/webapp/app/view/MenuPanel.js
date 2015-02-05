@@ -34,7 +34,7 @@ Ext.define('LE.view.MenuPanel', {
                 text: 'item 6'
             }]
         });
-        x = menu;
+
         me.items = [ menu ];
 
         me.callParent(arguments);

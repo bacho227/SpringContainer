@@ -91,7 +91,7 @@ function setVTypes() {
     Ext.apply(Ext.form.field.VTypes, {
         birthdate: function (val, field) {
             var date = field.parseDate(val);
-            if (!date) return;
+            if (!date) return true;
             var y = date.getFullYear(); // TODO შესამოწმებელია სხვა ბრაუზერებში
             var Y = new Date().getFullYear();
             if (y > Y - 5) return false;
