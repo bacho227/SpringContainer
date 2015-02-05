@@ -6,10 +6,7 @@ import ge.security.SessionUtils;
 import ge.security.annotation.Access;
 import ge.security.annotation.Anonymous;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -55,9 +52,8 @@ public class SecurityService {
 
 	@Anonymous
 	@RequestMapping(value = "signOut")
-	public
 	@ResponseBody
-	void signOut() {
+	public void signOut() {
 		SessionUtils.getSession().invalidate();
 	}
 }
