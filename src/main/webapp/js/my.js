@@ -164,7 +164,10 @@ function myRequest(obj) {
 				case 403:
 					logout();
 					break;
-				default:					
+                case 500:
+                    Ext.Msg.alert('Error 500', getExceptionMessage(response.responseText));
+                    break;
+				default:
 					Ext.Msg.alert('Error', response.statusText);
 					break;
 				}
@@ -174,6 +177,13 @@ function myRequest(obj) {
 
 	Ext.Ajax.request(requestData);
 
+}
+
+function getExceptionMessage(s){
+    s = s.substr(s.indexOf("Exception:") + 0);
+    s = s.substr(s.indexOf(":") + 2, s.indexOf("h1") - 13);
+    log(s);
+    return s;
 }
 
 function relayoutWindows() {

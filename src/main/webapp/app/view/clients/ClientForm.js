@@ -1,7 +1,7 @@
 Ext.define('LE.view.clients.ClientForm', {
     extend: 'Ext.form.Panel',
     bodyPadding: 5,
-    width: 400,
+    width: 800,
     frame: true,
     title: loc.clients.addClient,
     fieldDefaults: {
@@ -32,8 +32,7 @@ Ext.define('LE.view.clients.ClientForm', {
             ]
         });
 
-        me.items = [{
-            xtype: 'fieldset',
+        var fieldset1 = Ext.create('Ext.form.FieldSet', {
             border: false,
             defaults: {
                 xtype: 'textfield'
@@ -60,7 +59,15 @@ Ext.define('LE.view.clients.ClientForm', {
                 queryMode: 'local',
                 editable: false,
                 store: statusStore
-            }, {
+            }]
+        });
+
+        var fieldset2 = Ext.create('Ext.form.FieldSet', {
+            border: false,
+            defaults: {
+                xtype: 'textfield'
+            },
+            items: [{
                 fieldLabel: loc.clients.firstName,
                 name: 'firstName',
                 vtype: 'name'
@@ -74,11 +81,10 @@ Ext.define('LE.view.clients.ClientForm', {
                 name: 'birthDate',
                 vtype: 'birthdate'
             }]
-        }, {
-            xtype: 'fieldset',
-            collapsible: true,
-            title: loc.extraParams,
-            collapsed: true,
+        });
+
+        var fieldset3 = Ext.create('Ext.form.FieldSet', {
+            border: false,
             defaults: {
                 xtype: 'textfield'
             },
@@ -103,7 +109,15 @@ Ext.define('LE.view.clients.ClientForm', {
             }, {
                 fieldLabel: loc.clients.docIssuer,
                 name: 'docIssuer'
-            }, {
+            }]
+        });
+
+        var fieldset4 = Ext.create('Ext.form.FieldSet', {
+            border: false,
+            defaults: {
+                xtype: 'textfield'
+            },
+            items: [ {
                 xtype: 'datefield',
                 fieldLabel: loc.clients.docIssueDate,
                 name: 'docIssueDate'
@@ -132,7 +146,20 @@ Ext.define('LE.view.clients.ClientForm', {
                 fieldLabel: loc.clients.photo,
                 name: 'photo'
             }]
-        }]
+        });
+
+        me.items = [{
+            xtype: 'container',
+            layout: 'hbox',
+            items: [ fieldset1, fieldset2 ]
+        }, {
+            xtype: 'fieldset',
+            collapsible: true,
+            collapsed: true,
+            layout: 'hbox',
+            title: loc.extraParams,
+            items: [ fieldset3, fieldset4 ]
+        }];
 
         me.callParent(arguments);
     }
