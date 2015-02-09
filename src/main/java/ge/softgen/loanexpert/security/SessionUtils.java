@@ -1,6 +1,6 @@
-package ge.security;
+package ge.softgen.loanexpert.security;
 
-import ge.model.security.User;
+import ge.softgen.loanexpert.model.security.User;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 

@@ -1,7 +1,7 @@
-package ge.spring;
+package ge.softgen.loanexpert.spring;
 
-import ge.model.security.User;
-import ge.security.SessionUtils;
+import ge.softgen.loanexpert.model.security.User;
+import ge.softgen.loanexpert.security.SessionUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;

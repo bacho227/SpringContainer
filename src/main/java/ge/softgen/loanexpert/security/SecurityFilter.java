@@ -1,6 +1,6 @@
-package ge.security;
+package ge.softgen.loanexpert.security;
 
-import ge.model.security.User;
+import ge.softgen.loanexpert.model.security.User;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package ge.security.annotation;
+package ge.softgen.loanexpert.security.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

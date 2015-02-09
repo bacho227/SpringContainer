@@ -1,6 +1,6 @@
-package ge.spring;
+package ge.softgen.loanexpert.spring;
 
-import ge.security.SecurityFilter;
+import ge.softgen.loanexpert.security.SecurityFilter;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
@@ -12,7 +12,7 @@ import javax.servlet.*;
 import java.util.EnumSet;
 
 /**
- * Created by bacho on 2/4/15.
+ * Created by Bacho on 2/4/15.
  */
 @Order(value = 1)
 public class WebAppInitializer implements WebApplicationInitializer {

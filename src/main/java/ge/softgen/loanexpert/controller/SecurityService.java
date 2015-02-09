@@ -1,17 +1,17 @@
-package ge.controller;
+package ge.softgen.loanexpert.controller;
 
-import ge.model.UserManager;
-import ge.model.security.User;
-import ge.security.SessionUtils;
-import ge.security.annotation.Access;
-import ge.security.annotation.Anonymous;
+import ge.softgen.loanexpert.model.UserManager;
+import ge.softgen.loanexpert.model.security.User;
+import ge.softgen.loanexpert.security.SessionUtils;
+import ge.softgen.loanexpert.security.annotation.Access;
+import ge.softgen.loanexpert.security.annotation.Anonymous;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
 /**
- * Created by bacho on 2/2/15.
+ * Created by Bacho on 2/2/15.
  */
 @Controller
 @RequestMapping(value = "/security/")

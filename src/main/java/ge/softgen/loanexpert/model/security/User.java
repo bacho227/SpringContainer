@@ -1,4 +1,4 @@
-package ge.model.security;
+package ge.softgen.loanexpert.model.security;
 
 import java.io.Serializable;
 import java.util.HashSet;

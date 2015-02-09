@@ -1,10 +1,10 @@
-package ge.spring;
+package ge.softgen.loanexpert.spring;
 
-import ge.model.security.User;
-import ge.security.SessionUtils;
-import ge.security.annotation.Access;
-import ge.security.annotation.Anonymous;
-import ge.security.annotation.AnyAccess;
+import ge.softgen.loanexpert.model.security.User;
+import ge.softgen.loanexpert.security.SessionUtils;
+import ge.softgen.loanexpert.security.annotation.Access;
+import ge.softgen.loanexpert.security.annotation.Anonymous;
+import ge.softgen.loanexpert.security.annotation.AnyAccess;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

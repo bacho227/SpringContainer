@@ -1,10 +1,10 @@
-package ge.spring;
+package ge.softgen.loanexpert.spring;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Created by bacho on 2/4/15.
+ * Created by Bacho on 2/4/15.
  */
 
 @Configuration

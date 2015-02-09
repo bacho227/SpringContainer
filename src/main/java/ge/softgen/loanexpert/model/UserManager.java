@@ -1,15 +1,13 @@
-package ge.model;
+package ge.softgen.loanexpert.model;
 
-import ge.model.security.Permission;
-import ge.model.security.User;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import ge.softgen.loanexpert.model.security.Permission;
+import ge.softgen.loanexpert.model.security.User;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by bacho on 8/25/14.
+ * Created by Bacho on 8/25/14.
  */
 public class UserManager {
 	public static User getUserByUserName(String userName) {

@@ -1,4 +1,4 @@
-package ge.spring;
+package ge.softgen.loanexpert.spring;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
