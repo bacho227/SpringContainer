@@ -53,7 +53,7 @@ public class SecurityService {
 	@Anonymous
 	@RequestMapping(value = "signOut")
 	@ResponseBody
-	public void signOut() {
+	public void signOut(User user) {
 		SessionUtils.getSession().invalidate();
 	}
 }
