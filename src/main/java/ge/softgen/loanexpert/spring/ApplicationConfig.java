@@ -10,6 +10,7 @@ import java.util.Properties;
 public class ApplicationConfig {
 	private static final String appPropertiesFile = "application.properties";
 	private static final Properties properties = new Properties();
+	public static final String schema = "VANO";
 
 	static {
 		try {
@@ -18,6 +19,7 @@ public class ApplicationConfig {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+//		schema = getConfig("spring.datasource.schema");
 	}
 
 	public static String getConfig(String key) {

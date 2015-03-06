@@ -1,6 +1,6 @@
 package ge.softgen.loanexpert.controller;
 
-import ge.softgen.loanexpert.model.SecUsers;
+import ge.softgen.loanexpert.model.SecUser;
 import ge.softgen.loanexpert.model.forms.Client;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,8 +43,8 @@ public class ClientService {
 
 	@RequestMapping(value = "test", method = RequestMethod.POST)
 	@ResponseBody
-	public List<SecUsers> test() {
-		Query q = em.createQuery("SELECT t from SecUsers t");
+	public List<SecUser> test() {
+		Query q = em.createQuery("SELECT t from SecUser t");
 		return q.getResultList();
 	}
 }
