@@ -9,6 +9,7 @@
     <url>http://maven.apache.org</url>
 
 
+
     <!--	<repositories>
             <repository>
                 <id>repository.jboss.org-public</id>
@@ -28,6 +29,50 @@
         <slf4j.version>1.7.6</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
     </properties>
+
+	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<outputDirectory>target/classes</outputDirectory>
+		<directory>target</directory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<testResources>
+			<testResource>
+				<directory>src/test/resources</directory>
+			</testResource>
+		</testResources>
+		<finalName>LoanExpert</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<warName>${war.name}</warName>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<!--<manifest>-->
+					<!--<addClasspath>true</addClasspath>-->
+					<!--</manifest>-->
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
 
     <dependencies>
         <!-- Spring Framework -->
@@ -206,49 +251,5 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-        <finalName>LoanExpert</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.1</version>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <warName>${war.name}</warName>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                    <!--<manifest>-->
-                    <!--<addClasspath>true</addClasspath>-->
-                    <!--</manifest>-->
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>install</id>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>sources</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-        </plugins>
-    </build>
 
 </project>
