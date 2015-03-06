@@ -1,13 +1,12 @@
 package ge.softgen.loanexpert.spring;
 
-import static ge.softgen.loanexpert.spring.Config.getConfig;
+import static ge.softgen.loanexpert.spring.ApplicationConfig.getConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -37,29 +36,18 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
-
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(this.restDataSource());
-		em.setPackagesToScan(new String[]{getConfig("entitymanager.packages.to.scan")});
-
-		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter() {
+		em.setPackagesToScan(new String[]{getConfig("entityManager.packages.to.scan")});
+		em.setJpaVendorAdapter(new HibernateJpaVendorAdapter() {
 			{
-				String dialect = getConfig("hibernate.dialect");
-				this.setDatabasePlatform(dialect);
-
-				String showSql = getConfig("hibernate.show_sql");
+				this.setDatabasePlatform(getConfig("spring.jpa.database-platform"));
+				String showSql = getConfig("spring.jpa.show-sql");
 				if (showSql != null) {
 					this.setShowSql(showSql.equals("true"));
 				}
-
-				String generateDdl = getConfig("hibernate.ddl-auto");
-				if (showSql != null) {
-					this.setGenerateDdl(generateDdl.equals("update"));
-				}
 			}
-		};
-
-		em.setJpaVendorAdapter(vendorAdapter);
+		});
 		return em;
 	}
 
@@ -67,16 +55,16 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	public DataSource restDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 
-		String driver = getConfig("db.driver");
+		String driver = getConfig("spring.datasource.driver-class-name");
 		dataSource.setDriverClassName(driver);
 
-		String url = getConfig("db.url");
+		String url = getConfig("spring.datasource.url");
 		dataSource.setUrl(url);
 
-		String username = getConfig("db.username");
+		String username = getConfig("spring.datasource.username");
 		dataSource.setUsername(username);
 
-		String password = getConfig("db.password");
+		String password = getConfig("spring.datasource.password");
 		dataSource.setPassword(password);
 
 		return dataSource;

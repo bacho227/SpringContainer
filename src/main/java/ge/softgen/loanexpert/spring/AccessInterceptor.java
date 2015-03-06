@@ -32,6 +32,12 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 		if (user == null || !checkAccesses(cls, request, response, method, user)) {
 			return false;
 		}
+		if (ApplicationConfig.isDevMod()) {
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+			response.setHeader("Access-Control-Max-Age", "3600");
+			response.setHeader("Access-Control-Allow-Headers", "x-requested-with");
+		}
 		return super.preHandle(request, response, handler);
 	}
 
@@ -87,7 +93,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 	private boolean checkAccess(Access access, User user) throws IOException {
 		String[] permissionNames = null;
 		if (access != null)
-            permissionNames = access.value();
+			permissionNames = access.value();
 		if (permissionNames != null && permissionNames.length > 0 && !checkRole(user, permissionNames)) {
 			return false;
 		}
@@ -97,7 +103,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 	private boolean checkRole(User user, String[] permissionNames) {
 		for (String role : permissionNames) {
 			if (!user.hasPermission(role))
-                return false;
+				return false;
 		}
 		return true;
 	}

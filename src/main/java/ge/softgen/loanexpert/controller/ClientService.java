@@ -1,11 +1,17 @@
 package ge.softgen.loanexpert.controller;
 
+import ge.softgen.loanexpert.model.SecUsers;
 import ge.softgen.loanexpert.model.forms.Client;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 /**
  * Created by Bacho on 2/9/15.
@@ -14,6 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(value = "/client/")
 public class ClientService {
+	@PersistenceContext
+	private EntityManager em;
 
 	@RequestMapping(value = "addClient", method = RequestMethod.POST)
 	@ResponseBody
@@ -31,5 +39,12 @@ public class ClientService {
 	@ResponseBody
 	public Client removeClient(@RequestBody Client client) {
 		return client;
+	}
+
+	@RequestMapping(value = "test", method = RequestMethod.POST)
+	@ResponseBody
+	public List<SecUsers> test() {
+		Query q = em.createQuery("SELECT t from SecUsers t");
+		return q.getResultList();
 	}
 }
