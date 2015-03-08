@@ -1,6 +1,6 @@
 package ge.softgen.loanexpert.security;
 
-import ge.softgen.loanexpert.model.security.User;
+import ge.softgen.loanexpert.model.SecUser;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -11,26 +11,24 @@ public class SessionUtils {
 
 	public static final String SESSION_DATA_KEY = "data";
 
-	public static User getUser() {
+	public static SecUser getUser() {
 		HttpSession session = getSession();
-		User user;
+		SecUser user;
 		if (session != null) {
-			user = (User) session.getAttribute(SESSION_DATA_KEY);
+			user = (SecUser) session.getAttribute(SESSION_DATA_KEY);
 		} else {
 			user = null;
 		}
-
 		return user;
 	}
 
-	public static User getUser(HttpSession session) {
-		User user;
+	public static SecUser getUser(HttpSession session) {
+		SecUser user;
 		if (session != null) {
-			user = (User) session.getAttribute(SESSION_DATA_KEY);
+			user = (SecUser) session.getAttribute(SESSION_DATA_KEY);
 		} else {
 			user = null;
 		}
-
 		return user;
 	}
 
@@ -43,7 +41,6 @@ public class SessionUtils {
 			ex.printStackTrace();
 			request = null;
 		}
-
 		return request;
 	}
 
@@ -55,19 +52,17 @@ public class SessionUtils {
 			ex.printStackTrace();
 			session = null;
 		}
-
 		return session;
 	}
 
 	public static Integer getUserId() {
 		Integer userId;
-		User user = getUser();
+		SecUser user = getUser();
 		if (user == null) {
 			userId = null;
 		} else {
-			userId = user.getUserId();
+			userId = user.getId();
 		}
-
 		return userId;
 	}
 

@@ -1,6 +1,6 @@
 package ge.softgen.loanexpert.security;
 
-import ge.softgen.loanexpert.model.security.User;
+import ge.softgen.loanexpert.model.SecUser;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +35,7 @@ public class SecurityFilter implements Filter {
 		}
 		System.out.println("filter url: " + url);
 
-		User user = SessionUtils.getUser(hRequest.getSession());
+		SecUser user = SessionUtils.getUser(hRequest.getSession());
 		if (user != null) {
 			if (isLoginPage) {
 				((HttpServletResponse) response).sendRedirect(basePath.toString());

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * Created by Bacho on 3/6/15.
  */
 @Entity
-@Table(name = "COL_ATTR_VALUES", schema = ApplicationConfig.schema)
+@Table(name = "COL_ATTR_VALUES")
 public class ColAttrValue implements Serializable {
 	private static final long serialVersionUID = 1L;
 

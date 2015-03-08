@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * Created by Bacho on 3/6/15.
  */
 @Entity
-@Table(name = "CUSTOMER_FIN_SECS", schema = ApplicationConfig.schema)
+@Table(name = "CUSTOMER_FIN_SECS")
 public class CustomerFinSec implements Serializable {
 	private static final long serialVersionUID = 1L;
 

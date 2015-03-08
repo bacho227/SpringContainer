@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * Created by Bacho on 3/6/15.
  */
 @Entity
-@Table(name = "LOAN_REQUESTS", schema = ApplicationConfig.schema)
+@Table(name = "LOAN_REQUESTS")
 public class LoanRequest implements Serializable {
 	private static final long serialVersionUID = 1L;
 

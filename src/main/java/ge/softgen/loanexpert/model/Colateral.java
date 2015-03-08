@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * Created by Bacho on 3/6/15.
  */
 @Entity
-@Table(name = "COLATERAL", schema = ApplicationConfig.schema)
+@Table(name = "COLATERAL")
 public class Colateral implements Serializable {
 	private static final long serialVersionUID = 1L;
 

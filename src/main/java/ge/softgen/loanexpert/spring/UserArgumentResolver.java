@@ -1,6 +1,6 @@
 package ge.softgen.loanexpert.spring;
 
-import ge.softgen.loanexpert.model.security.User;
+import ge.softgen.loanexpert.model.SecUser;
 import ge.softgen.loanexpert.security.SessionUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -10,14 +10,14 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 
 public class UserArgumentResolver implements HandlerMethodArgumentResolver {
 
-	@Override
-	public boolean supportsParameter(MethodParameter parameter) {
-		return parameter.getParameterType().equals(User.class);
-	}
+    @Override
+    public boolean supportsParameter(MethodParameter parameter) {
+        return parameter.getParameterType().equals(SecUser.class);
+    }
 
-	@Override
-	public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
-		return SessionUtils.getUser();
-	}
+    @Override
+    public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer, NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
+        return SessionUtils.getUser();
+    }
 
 }

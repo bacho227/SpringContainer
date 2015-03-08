@@ -11,7 +11,7 @@ import java.util.Arrays;
  * Created by Bacho on 3/6/15.
  */
 @Entity
-@Table(name = "CUSTOMER_JOINS", schema = ApplicationConfig.schema)
+@Table(name = "CUSTOMER_JOINS")
 public class CustomerJoin implements Serializable {
 	private static final long serialVersionUID = 1L;
 

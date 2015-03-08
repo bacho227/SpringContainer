@@ -1,32 +1,31 @@
 package ge.softgen.loanexpert.model;
 
-import ge.softgen.loanexpert.spring.ApplicationConfig;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
- * Created by Bacho on 3/6/15.
+ * Created by bacho on 3/7/15.
  */
 @Entity
-@Table(name = "SEC_USERS", schema = ApplicationConfig.schema)
+@Table(name = "SEC_USERS")
 public class SecUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private BigDecimal id;
+	private Integer id;
 	private String name;
 	private String surname;
 	private String ipRange;
 	private String phone;
+	private String username;
+	private String password;
 
 	@Id
 	@Column(name = "ID")
-	public BigDecimal getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(BigDecimal id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -70,6 +69,26 @@ public class SecUser implements Serializable {
 		this.phone = phone;
 	}
 
+	@Basic
+	@Column(name = "USERNAME")
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@Basic
+	@Column(name = "PASSWORD")
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -80,8 +99,10 @@ public class SecUser implements Serializable {
 		if (id != null ? !id.equals(secUser.id) : secUser.id != null) return false;
 		if (ipRange != null ? !ipRange.equals(secUser.ipRange) : secUser.ipRange != null) return false;
 		if (name != null ? !name.equals(secUser.name) : secUser.name != null) return false;
+		if (password != null ? !password.equals(secUser.password) : secUser.password != null) return false;
 		if (phone != null ? !phone.equals(secUser.phone) : secUser.phone != null) return false;
 		if (surname != null ? !surname.equals(secUser.surname) : secUser.surname != null) return false;
+		if (username != null ? !username.equals(secUser.username) : secUser.username != null) return false;
 
 		return true;
 	}
@@ -93,6 +114,8 @@ public class SecUser implements Serializable {
 		result = 31 * result + (surname != null ? surname.hashCode() : 0);
 		result = 31 * result + (ipRange != null ? ipRange.hashCode() : 0);
 		result = 31 * result + (phone != null ? phone.hashCode() : 0);
+		result = 31 * result + (username != null ? username.hashCode() : 0);
+		result = 31 * result + (password != null ? password.hashCode() : 0);
 		return result;
 	}
 }

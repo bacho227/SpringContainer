@@ -1,7 +1,5 @@
 package ge.softgen.loanexpert.model;
 
-import ge.softgen.loanexpert.spring.ApplicationConfig;
-
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,7 +13,7 @@ import java.util.Arrays;
  * Created by Bacho on 3/6/15.
  */
 @Entity
-@Table(name = "CUSTOMERS", schema = ApplicationConfig.schema)
+@Table(name = "CUSTOMERS")
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 

@@ -10,7 +10,7 @@ import java.math.BigDecimal;
  * Created by Bacho on 3/6/15.
  */
 @Entity
-@Table(name = "GEN_HEADER", schema = ApplicationConfig.schema)
+@Table(name = "GEN_HEADER")
 public class GenHeader implements Serializable {
 	private static final long serialVersionUID = 1L;
 

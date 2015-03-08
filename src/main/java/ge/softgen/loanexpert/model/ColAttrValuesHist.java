@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * Created by Bacho on 3/6/15.
  */
 @Entity
-@Table(name = "COL_ATTR_VALUES_HIST", schema = ApplicationConfig.schema)
+@Table(name = "COL_ATTR_VALUES_HIST")
 public class ColAttrValuesHist implements Serializable {
 	private static final long serialVersionUID = 1L;
 

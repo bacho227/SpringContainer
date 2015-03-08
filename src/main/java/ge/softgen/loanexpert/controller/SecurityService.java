@@ -1,14 +1,19 @@
 package ge.softgen.loanexpert.controller;
 
-import ge.softgen.loanexpert.model.UserManager;
+import ge.softgen.loanexpert.model.SecUser;
 import ge.softgen.loanexpert.model.security.User;
 import ge.softgen.loanexpert.security.SessionUtils;
-import ge.softgen.loanexpert.security.annotation.Access;
 import ge.softgen.loanexpert.security.annotation.Anonymous;
+import ge.softgen.loanexpert.message.MessageException;
+import ge.softgen.loanexpert.message.Status;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by Bacho on 2/2/15.
@@ -17,35 +22,34 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(value = "/security/")
 public class SecurityService {
 
+	@PersistenceContext
+	private EntityManager em;
+
 	@RequestMapping(value = "getUser")
 	@ResponseBody
-	public User getUser(User user) {
+	public SecUser getUser(SecUser user) {
 		return user;
 	}
 
-	@Access("ADMINa") // აქ a უნდა ეწეროს?
-	@RequestMapping(value = "test1")
-	@ResponseBody
-	public String test1(User user) {
-		return "asdssdfs sdg";
-	}
-
 	@Anonymous
-	@RequestMapping(value = "signIn", method = RequestMethod.POST)
 	@ResponseBody
-	public User signIn(@RequestParam String username, @RequestParam String password) {
-		User user = UserManager.getUserByUserName(username);
-		if (user.getUserId() != null) {
+	@RequestMapping(value = "signIn", method = RequestMethod.POST)
+	public SecUser signIn(@RequestParam String username, @RequestParam String password) throws MessageException {
+		Query query = em.createQuery("select t from SecUser t where t.username = :username", SecUser.class);
+		query.setParameter("username", username);
+		List<SecUser> users = query.getResultList();
+		SecUser user;
+		if (users.size() == 1) {
+			user = users.get(0);
 			if (password.equals(user.getPassword())) {
 				user.setPassword(null);
 				HttpSession session = SessionUtils.getSession();
 				session.setAttribute(SessionUtils.SESSION_DATA_KEY, user);
-				user.setMessage("SUCCESSFUL");
 			} else {
-				user.setMessage("BAD_PASSWORD");
+				throw new MessageException(Status.badPassword());
 			}
 		} else {
-			user.setMessage("BAD_USER");
+			throw new MessageException(Status.badUser());
 		}
 		return user;
 	}

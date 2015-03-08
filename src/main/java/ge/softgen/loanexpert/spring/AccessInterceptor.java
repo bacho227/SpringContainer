@@ -1,5 +1,6 @@
 package ge.softgen.loanexpert.spring;
 
+import ge.softgen.loanexpert.model.SecUser;
 import ge.softgen.loanexpert.model.security.User;
 import ge.softgen.loanexpert.security.SessionUtils;
 import ge.softgen.loanexpert.security.annotation.Access;
@@ -28,7 +29,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 		if (anonymous != null)
 			return super.preHandle(request, response, handler);
 
-		User user = checkAuthorization(response);
+		SecUser user = checkAuthorization(response);
 		if (user == null || !checkAccesses(cls, request, response, method, user)) {
 			return false;
 		}
@@ -41,8 +42,8 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 		return super.preHandle(request, response, handler);
 	}
 
-	private User checkAuthorization(HttpServletResponse response) throws IOException {
-		User user = SessionUtils.getUser();
+	private SecUser checkAuthorization(HttpServletResponse response) throws IOException {
+		SecUser user = SessionUtils.getUser();
 		if (user == null) {
 			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			response.getWriter().append("<html><body><center style=\"font-size:15px;margin-top:50px;\">გაიარეთ ავტორიზაია!</center></body></html>");
@@ -52,7 +53,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	private boolean checkAccesses(Class<?> cls, HttpServletRequest request, HttpServletResponse response,
-								  HandlerMethod method, User user) throws IOException {
+								  HandlerMethod method, SecUser user) throws IOException {
 		boolean flag = true;
 		AnyAccess anyAccess;
 		Access access = cls.getAnnotation(Access.class);
@@ -81,7 +82,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 		return flag;
 	}
 
-	private boolean checkAnyAccess(Access[] accesses, User user) throws IOException {
+	private boolean checkAnyAccess(Access[] accesses, SecUser user) throws IOException {
 		for (Access access : accesses) {
 			if (checkAccess(access, user)) {
 				return true;
@@ -90,7 +91,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 		return false;
 	}
 
-	private boolean checkAccess(Access access, User user) throws IOException {
+	private boolean checkAccess(Access access, SecUser user) throws IOException {
 		String[] permissionNames = null;
 		if (access != null)
 			permissionNames = access.value();
@@ -100,11 +101,11 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 		return true;
 	}
 
-	private boolean checkRole(User user, String[] permissionNames) {
-		for (String role : permissionNames) {
-			if (!user.hasPermission(role))
-				return false;
-		}
+	private boolean checkRole(SecUser user, String[] permissionNames) {
+//		for (String role : permissionNames) {
+//			if (!user.hasPermission(role))
+//				return false;
+//		}
 		return true;
 	}
 

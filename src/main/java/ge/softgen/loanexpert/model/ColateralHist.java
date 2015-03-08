@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * Created by Bacho on 3/6/15.
  */
 @Entity
-@Table(name = "COLATERAL_HIST", schema = ApplicationConfig.schema)
+@Table(name = "COLATERAL_HIST")
 public class ColateralHist implements Serializable {
 	private static final long serialVersionUID = 1L;
 
