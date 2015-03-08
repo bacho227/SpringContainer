@@ -50,7 +50,7 @@ Ext.define('LE.view.UserButton', {
 
         me.glyph = g.get(g.user);
 
-        me.text = le.user.firstName + ' ' + le.user.lastName;
+        me.text = le.user.name + ' ' + le.user.surname;
         me.menu = [themeCombo, langCombo, {
             xtype: 'menuseparator'
         }, {

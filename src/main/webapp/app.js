@@ -13,7 +13,7 @@ Ext.application({
 			layout: 'fit',
             border: false
 		});
-        viewport.setLoading();
+        //viewport.setLoading(true);
         myRequest({
             url: 'rest/security/getUser',
             callback: function(user){

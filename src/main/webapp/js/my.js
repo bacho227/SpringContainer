@@ -39,10 +39,9 @@ function login(form){
             password: form.elements.password.value
         },
         callback: function(user){
-			debugger;
             le.user = user;
 			localStorage.leUserName = user.username;
-			//localStorage.leFullName = user.firstName + ' ' + user.lastName;
+			//localStorage.leFullName = user.name + ' ' + user.surname;
 			location.href = "index.html";
 
             log(user);
