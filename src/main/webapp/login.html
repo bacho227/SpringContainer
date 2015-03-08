@@ -25,7 +25,9 @@
 	</table>
 </form>
 <script>
-	login(Ext.query('form')[0]);
+	Ext.onReady(function(){
+		login(Ext.query('form')[0]);
+	});
 </script>
 </body>
 </html>

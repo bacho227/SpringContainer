@@ -39,27 +39,12 @@ function login(form){
             password: form.elements.password.value
         },
         callback: function(user){
+			debugger;
             le.user = user;
-            var msg = '';
-            switch (user.message) {
-                case "SUCCESSFUL":
-                    localStorage.leUserName = user.username;
-                    //localStorage.leFullName = user.firstName + ' ' + user.lastName;
-                    location.href = "index.html";
-                    break;
-                case "EMPTY_USER_PASSWORD":
-                    msg = 'მიუთითეთ პაროლი';
-                    break;
-                case "BAD_USER":
-                    msg = 'ასეთი მომხმარებელი არ არსებობს! გთხოვთ გაიაროთ რეგისტრაცია!';
-                    break;
-                case "BAD_PASSWORD":
-                    msg = 'არასწორი პაროლი';
-                    break;
-            }
-            if (msg) {
-                Ext.Msg.alert(loc.error, msg);
-            }
+			localStorage.leUserName = user.username;
+			//localStorage.leFullName = user.firstName + ' ' + user.lastName;
+			location.href = "index.html";
+
             log(user);
         }
     });
@@ -151,6 +136,7 @@ function myRequest(obj) {
 		params : obj.params,
 		jsonData : obj.jsonData,
 		callback : function(options, success, response) {
+			var headers = response.getAllResponseHeaders();
 			if (success) {
 				var res = response.responseText;
 				try {
@@ -165,10 +151,11 @@ function myRequest(obj) {
 					logout();
 					break;
                 case 500:
-                    Ext.Msg.alert('Error 500', getExceptionMessage(response.responseText));
+					var errText = headers['le-message'] ? response.responseText : getExceptionMessage(response.responseText);
+                    Ext.Msg.alert('შეცდომა', errText);
                     break;
 				default:
-					Ext.Msg.alert('Error', response.statusText);
+					Ext.Msg.alert('შეცდომა', response.statusText);
 					break;
 				}
 			}
