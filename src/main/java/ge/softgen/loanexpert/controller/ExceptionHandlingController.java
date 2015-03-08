@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
@@ -16,11 +17,13 @@ public class ExceptionHandlingController {
 
 	@ExceptionHandler(MessageException.class)
 	public void handleError(HttpServletResponse resp, MessageException exception) {
-		String message = exception.getMessage();
 		try {
-			resp.setHeader("le-message", URLEncoder.encode(message, "UTF-8").replace("+", "%20"));
+			resp.setContentType("text/html");
+			resp.setCharacterEncoding("UTF-8");
+			resp.setIntHeader("le-message", 1);
 			resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-		} catch (UnsupportedEncodingException e) {
+			resp.getWriter().append(exception.getMessage());
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
