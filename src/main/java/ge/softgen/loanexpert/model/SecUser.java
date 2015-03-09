@@ -30,17 +30,20 @@ public class SecUser implements Serializable {
 
 	@PostLoad
 	private void loadPermissions() {
-		for (SecUserRole secUserRole : secUserRoles) {
-			SecRole secRole = secUserRole.getSecRole();
-			if (secRole != null) {
-				List<SecRolePermission> secRolePermissions = secRole.getSecRolePermissions();
-				if (secRolePermissions != null)
-					for (SecRolePermission secRolePermission : secRolePermissions) {
-						SecPermission secPermission = secRolePermission.getSecPermission();
-						if (secPermission != null) {
-							permissionsSet.add(secPermission.getName());
+		if (secUserRoles != null) {
+			for (SecUserRole secUserRole : secUserRoles) {
+				SecRole secRole = secUserRole.getSecRole();
+				if (secRole != null) {
+					List<SecRolePermission> secRolePermissions = secRole.getSecRolePermissions();
+					if (secRolePermissions != null) {
+						for (SecRolePermission secRolePermission : secRolePermissions) {
+							SecPermission secPermission = secRolePermission.getSecPermission();
+							if (secPermission != null) {
+								permissionsSet.add(secPermission.getName());
+							}
 						}
 					}
+				}
 			}
 		}
 	}
