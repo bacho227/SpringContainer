@@ -2,6 +2,7 @@ package ge.softgen.loanexpert.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by bacho on 3/7/15.
@@ -18,6 +19,7 @@ public class SecUser implements Serializable {
 	private String phone;
 	private String username;
 	private String password;
+	private List<SecUserRole> secUserRoles;
 
 	@Id
 	@Column(name = "ID")
@@ -87,6 +89,16 @@ public class SecUser implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name = "USER_ID")
+	public List<SecUserRole> getSecUserRoles() {
+		return secUserRoles;
+	}
+
+	public void setSecUserRoles(List<SecUserRole> secUserRoles) {
+		this.secUserRoles = secUserRoles;
 	}
 
 	@Override
