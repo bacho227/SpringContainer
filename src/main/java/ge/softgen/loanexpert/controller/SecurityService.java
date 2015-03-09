@@ -2,10 +2,13 @@ package ge.softgen.loanexpert.controller;
 
 import ge.softgen.loanexpert.model.SecUser;
 import ge.softgen.loanexpert.model.security.User;
+import ge.softgen.loanexpert.repository.security.SecUserRepository;
 import ge.softgen.loanexpert.security.SessionUtils;
 import ge.softgen.loanexpert.security.annotation.Anonymous;
 import ge.softgen.loanexpert.message.MessageException;
 import ge.softgen.loanexpert.message.Status;
+import ge.softgen.loanexpert.tools.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +24,12 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/security/")
 public class SecurityService {
+//
+//	@PersistenceContext
+//	private EntityManager em;
 
-	@PersistenceContext
-	private EntityManager em;
+	@Autowired
+	private SecUserRepository secUserRepository;
 
 	@RequestMapping(value = "getUser")
 	@ResponseBody
@@ -35,13 +41,9 @@ public class SecurityService {
 	@ResponseBody
 	@RequestMapping(value = "signIn", method = RequestMethod.POST)
 	public SecUser signIn(@RequestParam String username, @RequestParam String password) throws MessageException {
-		Query query = em.createQuery("select t from SecUser t where t.username = :username", SecUser.class);
-		query.setParameter("username", username);
-		List<SecUser> users = query.getResultList();
-		SecUser user;
-		if (users.size() == 1) {
-			user = users.get(0);
-			if (password.equals(user.getPassword())) {
+		SecUser user = secUserRepository.getUser(username);
+		if (user != null) {
+			if (user.getPassword().equals(Utils.getMD5(password))) {
 				user.setPassword(null);
 				HttpSession session = SessionUtils.getSession();
 				session.setAttribute(SessionUtils.SESSION_DATA_KEY, user);
