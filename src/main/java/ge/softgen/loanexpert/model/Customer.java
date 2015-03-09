@@ -41,28 +41,28 @@ public class Customer implements Serializable {
 		this.pid = pid;
 	}
 
-	private String name;
+	private String firstName;
 
 	@Basic
-	@javax.persistence.Column(name = "NAME")
-	public String getName() {
-		return name;
+	@javax.persistence.Column(name = "FIRST_NAME")
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	private String surname;
+	private String lastName;
 
 	@Basic
-	@javax.persistence.Column(name = "SURNAME")
-	public String getSurname() {
-		return surname;
+	@javax.persistence.Column(name = "LAST_NAME")
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	private String fullName;
@@ -305,11 +305,11 @@ public class Customer implements Serializable {
 		if (isjuridical != null ? !isjuridical.equals(customer.isjuridical) : customer.isjuridical != null) return false;
 		if (isresident != null ? !isresident.equals(customer.isresident) : customer.isresident != null) return false;
 		if (juridicalAddress != null ? !juridicalAddress.equals(customer.juridicalAddress) : customer.juridicalAddress != null) return false;
-		if (name != null ? !name.equals(customer.name) : customer.name != null) return false;
+		if (firstName != null ? !firstName.equals(customer.firstName) : customer.firstName != null) return false;
 		if (phone != null ? !phone.equals(customer.phone) : customer.phone != null) return false;
 		if (!Arrays.equals(photo, customer.photo)) return false;
 		if (pid != null ? !pid.equals(customer.pid) : customer.pid != null) return false;
-		if (surname != null ? !surname.equals(customer.surname) : customer.surname != null) return false;
+		if (lastName != null ? !lastName.equals(customer.lastName) : customer.lastName != null) return false;
 
 		return true;
 	}
@@ -318,8 +318,8 @@ public class Customer implements Serializable {
 	public int hashCode() {
 		int result = id != null ? id.hashCode() : 0;
 		result = 31 * result + (pid != null ? pid.hashCode() : 0);
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		result = 31 * result + (surname != null ? surname.hashCode() : 0);
+		result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+		result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
 		result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
 		result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
 		result = 31 * result + (isresident != null ? isresident.hashCode() : 0);
