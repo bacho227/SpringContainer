@@ -1,10 +1,8 @@
 package ge.softgen.loanexpert.model;
 
-import ge.softgen.loanexpert.spring.ApplicationConfig;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * Created by Bacho on 3/6/15.
@@ -14,18 +12,18 @@ import java.math.BigDecimal;
 public class SecPermission implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private BigDecimal id;
+	private Integer id;
 	private String name;
 	private String fullName;
-	private BigDecimal parentId;
+	private Integer parentId;
 
 	@Id
 	@Column(name = "ID")
-	public BigDecimal getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(BigDecimal id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -51,11 +49,11 @@ public class SecPermission implements Serializable {
 
 	@Basic
 	@Column(name = "PARENT_ID")
-	public BigDecimal getParentId() {
+	public Integer getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(BigDecimal parentId) {
+	public void setParentId(Integer parentId) {
 		this.parentId = parentId;
 	}
 

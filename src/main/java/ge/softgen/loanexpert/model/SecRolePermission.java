@@ -1,10 +1,8 @@
 package ge.softgen.loanexpert.model;
 
-import ge.softgen.loanexpert.spring.ApplicationConfig;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * Created by Bacho on 3/6/15.
@@ -14,27 +12,38 @@ import java.math.BigDecimal;
 public class SecRolePermission implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private BigDecimal roleId;
-	private BigDecimal permissionId;
+	private Integer roleId;
+	private Integer permissionId;
+	private SecPermission secPermission;
 
 	@Id
 	@Column(name = "ROLE_ID")
-	public BigDecimal getRoleId() {
+	public Integer getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(BigDecimal roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 
 	@Id
 	@Column(name = "PERMISSION_ID")
-	public BigDecimal getPermissionId() {
+	public Integer getPermissionId() {
 		return permissionId;
 	}
 
-	public void setPermissionId(BigDecimal permissionId) {
+	public void setPermissionId(Integer permissionId) {
 		this.permissionId = permissionId;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "PERMISSION_ID", referencedColumnName = "ID")
+	public SecPermission getSecPermission() {
+		return secPermission;
+	}
+
+	public void setSecPermission(SecPermission secPermission) {
+		this.secPermission = secPermission;
 	}
 
 	@Override

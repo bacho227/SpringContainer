@@ -2,6 +2,7 @@ package ge.softgen.loanexpert.controller;
 
 import ge.softgen.loanexpert.model.SecUser;
 import ge.softgen.loanexpert.model.forms.Client;
+import ge.softgen.loanexpert.security.annotation.Access;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +42,7 @@ public class ClientService {
 		return client;
 	}
 
+	@Access("test")
 	@RequestMapping(value = "test", method = RequestMethod.POST)
 	@ResponseBody
 	public List<SecUser> test() {

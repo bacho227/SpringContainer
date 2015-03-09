@@ -1,10 +1,8 @@
 package ge.softgen.loanexpert.model;
 
-import ge.softgen.loanexpert.spring.ApplicationConfig;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
  * Created by Bacho on 3/6/15.
@@ -14,49 +12,60 @@ import java.math.BigDecimal;
 public class SecUserRole implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private BigDecimal id;
-	private BigDecimal userId;
-	private BigDecimal roleId;
-	private BigDecimal status;
+	private Integer id;
+	private Integer userId;
+	private Integer roleId;
+	private Integer status;
+	private SecRole secRole;
 
 	@Id
 	@Column(name = "ID")
-	public BigDecimal getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(BigDecimal id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	@Basic
 	@Column(name = "USER_ID")
-	public BigDecimal getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(BigDecimal userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
 
 	@Basic
 	@Column(name = "ROLE_ID")
-	public BigDecimal getRoleId() {
+	public Integer getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(BigDecimal roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 
 	@Basic
 	@Column(name = "STATUS")
-	public BigDecimal getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(BigDecimal status) {
+	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID", insertable = false, updatable = false)
+	public SecRole getSecRole() {
+		return secRole;
+	}
+
+	public void setSecRole(SecRole secRole) {
+		this.secRole = secRole;
 	}
 
 	@Override

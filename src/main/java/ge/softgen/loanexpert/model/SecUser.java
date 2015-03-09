@@ -1,8 +1,12 @@
 package ge.softgen.loanexpert.model;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by bacho on 3/7/15.
@@ -20,6 +24,30 @@ public class SecUser implements Serializable {
 	private String username;
 	private String password;
 	private List<SecUserRole> secUserRoles;
+
+	@Transient
+	private Set<String> permissionsSet = new HashSet<>();
+
+	@PostLoad
+	private void loadPermissions() {
+		for (SecUserRole secUserRole : secUserRoles) {
+			SecRole secRole = secUserRole.getSecRole();
+			if (secRole != null) {
+				List<SecRolePermission> secRolePermissions = secRole.getSecRolePermissions();
+				if (secRolePermissions != null)
+					for (SecRolePermission secRolePermission : secRolePermissions) {
+						SecPermission secPermission = secRolePermission.getSecPermission();
+						if (secPermission != null) {
+							permissionsSet.add(secPermission.getName());
+						}
+					}
+			}
+		}
+	}
+
+	public boolean hasPermission(String permissionName) {
+		return permissionsSet.contains(permissionName);
+	}
 
 	@Id
 	@Column(name = "ID")
@@ -92,7 +120,8 @@ public class SecUser implements Serializable {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "USER_ID")
+	@JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+	@Where(clause = "status=1")
 	public List<SecUserRole> getSecUserRoles() {
 		return secUserRoles;
 	}

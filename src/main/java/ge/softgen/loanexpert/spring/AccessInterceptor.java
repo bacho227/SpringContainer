@@ -102,10 +102,10 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
 	}
 
 	private boolean checkRole(SecUser user, String[] permissionNames) {
-//		for (String role : permissionNames) {
-//			if (!user.hasPermission(role))
-//				return false;
-//		}
+		for (String role : permissionNames) {
+			if (!user.hasPermission(role))
+				return false;
+		}
 		return true;
 	}
 
