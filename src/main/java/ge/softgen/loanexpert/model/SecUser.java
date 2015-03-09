@@ -12,8 +12,8 @@ public class SecUser implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	private String name;
-	private String surname;
+	private String firstName;
+	private String lastName;
 	private String ipRange;
 	private String phone;
 	private String username;
@@ -30,23 +30,23 @@ public class SecUser implements Serializable {
 	}
 
 	@Basic
-	@Column(name = "NAME")
-	public String getName() {
-		return name;
+	@Column(name = "FIRST_NAME")
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	@Basic
-	@Column(name = "SURNAME")
-	public String getSurname() {
-		return surname;
+	@Column(name = "LAST_NAME")
+	public String getLastName() {
+		return lastName;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	@Basic
@@ -98,10 +98,10 @@ public class SecUser implements Serializable {
 
 		if (id != null ? !id.equals(secUser.id) : secUser.id != null) return false;
 		if (ipRange != null ? !ipRange.equals(secUser.ipRange) : secUser.ipRange != null) return false;
-		if (name != null ? !name.equals(secUser.name) : secUser.name != null) return false;
+		if (firstName != null ? !firstName.equals(secUser.firstName) : secUser.firstName != null) return false;
 		if (password != null ? !password.equals(secUser.password) : secUser.password != null) return false;
 		if (phone != null ? !phone.equals(secUser.phone) : secUser.phone != null) return false;
-		if (surname != null ? !surname.equals(secUser.surname) : secUser.surname != null) return false;
+		if (lastName != null ? !lastName.equals(secUser.lastName) : secUser.lastName != null) return false;
 		if (username != null ? !username.equals(secUser.username) : secUser.username != null) return false;
 
 		return true;
@@ -110,8 +110,8 @@ public class SecUser implements Serializable {
 	@Override
 	public int hashCode() {
 		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (name != null ? name.hashCode() : 0);
-		result = 31 * result + (surname != null ? surname.hashCode() : 0);
+		result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
+		result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
 		result = 31 * result + (ipRange != null ? ipRange.hashCode() : 0);
 		result = 31 * result + (phone != null ? phone.hashCode() : 0);
 		result = 31 * result + (username != null ? username.hashCode() : 0);
