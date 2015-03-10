@@ -30,12 +30,12 @@ public class SecurityFilter implements Filter {
 		if (ApplicationConfig.isDevMod()) {
 			hResponse.setHeader("Access-Control-Allow-Origin", "*");
 			hResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, HEAD");
-			hResponse.setHeader("Access-Control-Max-Age", "3600");
+//			hResponse.setHeader("Access-Control-Max-Age", "3600");
 			hResponse.setHeader("Access-Control-Allow-Headers", "x-requested-with");
 		}
 
 		String url = hRequest.getRequestURL().toString();
-		URL basePath = new URL(request.getScheme(), request.getServerName(), request.getServerPort(), ((HttpServletRequest) request).getContextPath());
+		URL basePath = new URL(hRequest.getScheme(), hRequest.getServerName(), hRequest.getServerPort(), hRequest.getContextPath());
 		boolean isRequest = false, isLoginPage = false;
 		if (hRequest.getHeader("X-Requested-With") != null) {
 			isRequest = true;
