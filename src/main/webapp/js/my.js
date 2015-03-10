@@ -130,12 +130,12 @@ function myRequest(obj) {
 	emptyString2Null(obj.data);
 
 	var requestData = {
-		url : 'http://188.129.204.4:8181/'+obj.url,
+		url : obj.url,
 		method : obj.method,
 		params : obj.params,
 		jsonData : obj.jsonData,
-        withCredentials: true,
-        useDefaultXhrHeader: false,
+        //withCredentials: true,
+        //useDefaultXhrHeader: false,
 		callback : function(options, success, response) {
 			var headers = response.getAllResponseHeaders();
 			if (success) {
