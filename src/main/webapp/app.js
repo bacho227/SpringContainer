@@ -1,11 +1,12 @@
 var le = le || {};
 
 var myIp = localStorage.getItem('myIp');
+log(myIp)
 if (myIp) {
 	Ext.Loader.setConfig({
 		enabled: true,
 		paths: {
-			'QMS': myIp + '/app'
+			'LE': myIp + '/app'
 		}
 	});
 }
