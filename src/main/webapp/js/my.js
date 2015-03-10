@@ -134,8 +134,6 @@ function myRequest(obj) {
 		method : obj.method,
 		params : obj.params,
 		jsonData : obj.jsonData,
-        //withCredentials: true,
-        //useDefaultXhrHeader: false,
 		callback : function(options, success, response) {
 			var headers = response.getAllResponseHeaders();
 			if (success) {

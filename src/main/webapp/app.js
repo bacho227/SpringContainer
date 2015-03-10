@@ -1,17 +1,11 @@
 var le = le || {};
 
-var myIp = localStorage.getItem('myIp');
-log(myIp)
-if (myIp) {
-	Ext.Loader.setConfig({
-		enabled: true,
-		paths: {
-			'LE': myIp + '/app'
-		}
-	});
-}
+Ext.Loader.setConfig({
+    enabled: true
+});
+
 Ext.application({
-	name: (myIp ? '' : 'LE'),
+	name: ('LE'),
 	appFolder: 'app',
 	launch: function () {
 
