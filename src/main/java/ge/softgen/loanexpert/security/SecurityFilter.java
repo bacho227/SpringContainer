@@ -51,7 +51,8 @@ public class SecurityFilter implements Filter {
 				hResponse.sendRedirect(basePath.toString());
 			}
 			filterChain.doFilter(request, response);
-		} else if (isLoginPage || url.startsWith(basePath + "/rest/") || url.startsWith(basePath + "/js/") || url.startsWith(basePath + "/css/") || url.startsWith(basePath + "/images/")) {
+		} else if (isLoginPage || url.startsWith(basePath + "/app") || url.startsWith(basePath + "/rest/") || url.startsWith(basePath + "/js/") || url.startsWith(basePath + "/css/") || url
+				.startsWith(basePath + "/images/")) {
 			filterChain.doFilter(request, response);
 		} else {
 			hResponse.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
