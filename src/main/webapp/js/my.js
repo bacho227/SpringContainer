@@ -208,6 +208,8 @@ function userLogout(){
 	});
 }
 
+
+
 function adminLogout(){
 	myRequest({
 		url : '../rest/admin/security/signout',
