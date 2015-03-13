@@ -7,10 +7,7 @@ import ge.softgen.loanexpert.repository.customer.CustomerRepository;
 import ge.softgen.loanexpert.security.annotation.Access;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -24,28 +21,20 @@ import java.util.List;
 @Controller
 @RequestMapping(value = "/customer/")
 public class CustomerService {
-//	@PersistenceContext
-//	private EntityManager em;
 
 	@Autowired
 	private CustomerRepository customerRepository;
 
-	@RequestMapping(value = "addCustomer", method = RequestMethod.POST)
 	@ResponseBody
-	public Customer addCustomer(@RequestBody Customer customer) {
+	@RequestMapping(value = "saveCustomer", method = RequestMethod.POST)
+	public Customer saveCustomer(@RequestBody Customer customer) {
 		return customerRepository.save(customer);
 	}
 
-	@RequestMapping(value = "editCustomer", method = RequestMethod.POST)
 	@ResponseBody
-	public Customer editCustomer(@RequestBody Customer customer) {
-		return customer;
-	}
-
-	@RequestMapping(value = "removeCustomer", method = RequestMethod.POST)
-	@ResponseBody
-	public Customer removeCustomer(@RequestBody Customer customer) {
-		return customer;
+	@RequestMapping(value = "deleteCustomerById", method = RequestMethod.POST)
+	public void deleteCustomerById(@RequestParam Integer id) {
+		customerRepository.deleteById(id);
 	}
 
 
