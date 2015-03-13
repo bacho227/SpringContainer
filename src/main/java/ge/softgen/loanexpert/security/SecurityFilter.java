@@ -1,7 +1,6 @@
 package ge.softgen.loanexpert.security;
 
 import ge.softgen.loanexpert.model.SecUser;
-import ge.softgen.loanexpert.spring.ApplicationConfig;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -26,13 +25,6 @@ public class SecurityFilter implements Filter {
 
 		HttpServletRequest hRequest = ((HttpServletRequest) request);
 		HttpServletResponse hResponse = ((HttpServletResponse) response);
-
-		if (ApplicationConfig.isDevMod()) {
-			hResponse.setHeader("Access-Control-Allow-Origin", "*");
-			hResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT, HEAD");
-//			hResponse.setHeader("Access-Control-Max-Age", "3600");
-			hResponse.setHeader("Access-Control-Allow-Headers", "x-requested-with");
-		}
 
 		String url = hRequest.getRequestURL().toString();
 		URL basePath = new URL(hRequest.getScheme(), hRequest.getServerName(), hRequest.getServerPort(), hRequest.getContextPath());

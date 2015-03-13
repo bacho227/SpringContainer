@@ -1,7 +1,6 @@
 package ge.softgen.loanexpert.spring;
 
 import ge.softgen.loanexpert.model.SecUser;
-import ge.softgen.loanexpert.model.security.User;
 import ge.softgen.loanexpert.security.SessionUtils;
 import ge.softgen.loanexpert.security.annotation.Access;
 import ge.softgen.loanexpert.security.annotation.Anonymous;

@@ -1,11 +1,7 @@
 package ge.softgen.loanexpert.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Arrays;
 
@@ -14,31 +10,33 @@ import java.util.Arrays;
  */
 @Entity
 @Table(name = "CUSTOMERS")
+@SequenceGenerator(name = "customerSeq", sequenceName = "CUSTOMERS_SEQ")
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private BigDecimal id;
+	private Integer id;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "customerSeq")
 	@javax.persistence.Column(name = "ID")
-	public BigDecimal getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(BigDecimal id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	private String pid;
+	private String personalNo;
 
 	@Basic
-	@javax.persistence.Column(name = "PID")
-	public String getPid() {
-		return pid;
+	@javax.persistence.Column(name = "PERSONAL_NO")
+	public String getPersonalNo() {
+		return personalNo;
 	}
 
-	public void setPid(String pid) {
-		this.pid = pid;
+	public void setPersonalNo(String personalNo) {
+		this.personalNo = personalNo;
 	}
 
 	private String firstName;
@@ -89,16 +87,16 @@ public class Customer implements Serializable {
 		this.birthDate = birthDate;
 	}
 
-	private BigDecimal isresident;
+	private Integer isResident;
 
 	@Basic
-	@javax.persistence.Column(name = "ISRESIDENT")
-	public BigDecimal getIsresident() {
-		return isresident;
+	@javax.persistence.Column(name = "IS_RESIDENT")
+	public Integer getIsResident() {
+		return isResident;
 	}
 
-	public void setIsresident(BigDecimal isresident) {
-		this.isresident = isresident;
+	public void setIsResident(Integer isResident) {
+		this.isResident = isResident;
 	}
 
 	private String address;
@@ -137,51 +135,51 @@ public class Customer implements Serializable {
 		this.phone = phone;
 	}
 
-	private BigDecimal isjuridical;
+	private Integer isJuridical;
 
 	@Basic
-	@javax.persistence.Column(name = "ISJURIDICAL")
-	public BigDecimal getIsjuridical() {
-		return isjuridical;
+	@javax.persistence.Column(name = "IS_JURIDICAL")
+	public Integer getIsJuridical() {
+		return isJuridical;
 	}
 
-	public void setIsjuridical(BigDecimal isjuridical) {
-		this.isjuridical = isjuridical;
+	public void setIsJuridical(Integer isJuridical) {
+		this.isJuridical = isJuridical;
 	}
 
-	private BigDecimal customerType;
+	private Integer customerType;
 
 	@Basic
 	@javax.persistence.Column(name = "CUSTOMER_TYPE")
-	public BigDecimal getCustomerType() {
+	public Integer getCustomerType() {
 		return customerType;
 	}
 
-	public void setCustomerType(BigDecimal customerType) {
+	public void setCustomerType(Integer customerType) {
 		this.customerType = customerType;
 	}
 
-	private BigDecimal customerFinSec;
+	private Integer customerFinSec;
 
 	@Basic
 	@javax.persistence.Column(name = "CUSTOMER_FIN_SEC")
-	public BigDecimal getCustomerFinSec() {
+	public Integer getCustomerFinSec() {
 		return customerFinSec;
 	}
 
-	public void setCustomerFinSec(BigDecimal customerFinSec) {
+	public void setCustomerFinSec(Integer customerFinSec) {
 		this.customerFinSec = customerFinSec;
 	}
 
-	private BigDecimal docType;
+	private Integer docType;
 
 	@Basic
 	@javax.persistence.Column(name = "DOC_TYPE")
-	public BigDecimal getDocType() {
+	public Integer getDocType() {
 		return docType;
 	}
 
-	public void setDocType(BigDecimal docType) {
+	public void setDocType(Integer docType) {
 		this.docType = docType;
 	}
 
@@ -269,15 +267,15 @@ public class Customer implements Serializable {
 		this.comments = comments;
 	}
 
-	private BigDecimal gender;
+	private Integer gender;
 
 	@Basic
 	@javax.persistence.Column(name = "GENDER")
-	public BigDecimal getGender() {
+	public Integer getGender() {
 		return gender;
 	}
 
-	public void setGender(BigDecimal gender) {
+	public void setGender(Integer gender) {
 		this.gender = gender;
 	}
 
@@ -302,13 +300,13 @@ public class Customer implements Serializable {
 		if (fullName != null ? !fullName.equals(customer.fullName) : customer.fullName != null) return false;
 		if (gender != null ? !gender.equals(customer.gender) : customer.gender != null) return false;
 		if (id != null ? !id.equals(customer.id) : customer.id != null) return false;
-		if (isjuridical != null ? !isjuridical.equals(customer.isjuridical) : customer.isjuridical != null) return false;
-		if (isresident != null ? !isresident.equals(customer.isresident) : customer.isresident != null) return false;
+		if (isJuridical != null ? !isJuridical.equals(customer.isJuridical) : customer.isJuridical != null) return false;
+		if (isResident != null ? !isResident.equals(customer.isResident) : customer.isResident != null) return false;
 		if (juridicalAddress != null ? !juridicalAddress.equals(customer.juridicalAddress) : customer.juridicalAddress != null) return false;
 		if (firstName != null ? !firstName.equals(customer.firstName) : customer.firstName != null) return false;
 		if (phone != null ? !phone.equals(customer.phone) : customer.phone != null) return false;
 		if (!Arrays.equals(photo, customer.photo)) return false;
-		if (pid != null ? !pid.equals(customer.pid) : customer.pid != null) return false;
+		if (personalNo != null ? !personalNo.equals(customer.personalNo) : customer.personalNo != null) return false;
 		if (lastName != null ? !lastName.equals(customer.lastName) : customer.lastName != null) return false;
 
 		return true;
@@ -317,16 +315,16 @@ public class Customer implements Serializable {
 	@Override
 	public int hashCode() {
 		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (pid != null ? pid.hashCode() : 0);
+		result = 31 * result + (personalNo != null ? personalNo.hashCode() : 0);
 		result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
 		result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
 		result = 31 * result + (fullName != null ? fullName.hashCode() : 0);
 		result = 31 * result + (birthDate != null ? birthDate.hashCode() : 0);
-		result = 31 * result + (isresident != null ? isresident.hashCode() : 0);
+		result = 31 * result + (isResident != null ? isResident.hashCode() : 0);
 		result = 31 * result + (address != null ? address.hashCode() : 0);
 		result = 31 * result + (juridicalAddress != null ? juridicalAddress.hashCode() : 0);
 		result = 31 * result + (phone != null ? phone.hashCode() : 0);
-		result = 31 * result + (isjuridical != null ? isjuridical.hashCode() : 0);
+		result = 31 * result + (isJuridical != null ? isJuridical.hashCode() : 0);
 		result = 31 * result + (customerType != null ? customerType.hashCode() : 0);
 		result = 31 * result + (customerFinSec != null ? customerFinSec.hashCode() : 0);
 		result = 31 * result + (docType != null ? docType.hashCode() : 0);

@@ -4,6 +4,7 @@ import ge.softgen.loanexpert.model.SecUser;
 import ge.softgen.loanexpert.model.security.User;
 import ge.softgen.loanexpert.repository.security.SecUserRepository;
 import ge.softgen.loanexpert.security.SessionUtils;
+import ge.softgen.loanexpert.security.annotation.Access;
 import ge.softgen.loanexpert.security.annotation.Anonymous;
 import ge.softgen.loanexpert.message.MessageException;
 import ge.softgen.loanexpert.message.Status;
@@ -57,9 +58,15 @@ public class SecurityService {
 	}
 
 	@Anonymous
-	@RequestMapping(value = "signOut")
 	@ResponseBody
-	public void signOut(User user) {
+	@RequestMapping(value = "signOut")
+	public void signOut() {
 		SessionUtils.getSession().invalidate();
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "getUsers", method = RequestMethod.POST)
+	public List<SecUser> getUsers() {
+		return secUserRepository.findAll();
 	}
 }
