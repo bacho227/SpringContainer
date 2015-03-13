@@ -21,7 +21,10 @@ var loc = {
     invalidPersonalNo: 'პირადი ნომერი არასწორია',
     invalidPhone: 'ტელეფონის ფორმატი არასწორია',
     invalidMobile: 'მობილურის ნომრის ფორმატი არასწორია',
-    invalidName: 'არასწორი სახელი'
+    invalidName: 'არასწორი სახელი',
+    save: 'შენახვა',
+    cancel: 'გაუქმება',
+    reset: 'გასუფთავება'
 };
 
 loc.menu = {
@@ -36,7 +39,7 @@ loc.login = {
     login : 'შესვლა'
 };
 
-loc.clients = {
+loc.customers = {
     addClient: 'კლიენტის რეგისტრაცია',
     personalNo: 'პირადი ნომერი',
     firstName: 'სახელი',
@@ -54,7 +57,8 @@ loc.clients = {
     phone: 'ტელეფონი',
     mobile: 'მობილური',
     email: 'ელ. ფოსტა',
-    photo: 'ფოტო'
+    photo: 'ფოტო',
+    isResident: 'არარეზიდენტი'
 }
 
 loc.collaterals = {

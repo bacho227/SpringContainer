@@ -21,7 +21,10 @@ var loc = {
     invalidPersonalNo: 'Invalid personal No',
     invalidPhone: 'Invalid phone number',
     invalidMobile: 'Invalid mobile number',
-    invalidName: 'Invalid Name'
+    invalidName: 'Invalid Name',
+    save: 'Save',
+    cancel: 'Cancel',
+    reset: 'Reset'
 };
 
 loc.menu = {
@@ -36,7 +39,7 @@ loc.login = {
     login : 'Login'
 };
 
-loc.clients = {
+loc.customers = {
     addClient: 'Client Registration',
     personalNo: 'Personal name',
     firstName: 'First name',
@@ -54,7 +57,8 @@ loc.clients = {
     phone: 'Phone number',
     mobile: 'Mobile number',
     email: 'Email',
-    photo: 'Photo'
+    photo: 'Photo',
+    isResident: 'Not Resident'
 }
 
 loc.collaterals = {

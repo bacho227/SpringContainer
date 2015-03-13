@@ -22,7 +22,7 @@ Ext.define('LE.view.MainPanel', {
         var center = Ext.create('Ext.panel.Panel', {
             region: 'center',
             bodyPadding: 10,
-            items: [ Ext.create('LE.view.clients.ClientForm')]
+            items: [ Ext.create('LE.view.customers.CustomerForm')]
         });
 
         me.items = [ header, menu, center ];
