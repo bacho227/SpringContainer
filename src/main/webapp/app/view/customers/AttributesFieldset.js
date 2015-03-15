@@ -72,7 +72,7 @@ Ext.define('LE.view.customers.AttributesFieldset', {
             var fields = me.items.items;
             for(var i in fields){
                 var obj = {
-                    id: fields[i].attrId,
+                    attrTypeId: fields[i].attrId,
                     value: fields[i].getValue()
                 };
                 if(fields[i].xtype == 'datefield'){

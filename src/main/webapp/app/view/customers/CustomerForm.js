@@ -162,20 +162,22 @@ Ext.define('LE.view.customers.CustomerForm', {
 
         function save(){
             if(!me.isValid()) return ;
-            var values = me.getForm().getValues();
-            values.isResident = values.isResident ? 1 : 0;
-            correctDates(values, ['birthDate', 'docIssueDate', 'docValidDate']);
+            var customer = me.getForm().getValues();
+            customer.isResident = customer.isResident ? 1 : 0;
+            correctDates(customer, ['birthDate', 'docIssueDate', 'docValidDate']);
             // TODO მისამატებელია ატრიბუტები
-            delete values.attributes;
-            //values.attributes = attributesFieldset.getValues();
+            delete customer.attributes;
+            var attributes = attributesFieldset.getValues();
             myRequest({
                 url: '/rest/customer/saveCustomer',
-                jsonData: values,
+                jsonData: {
+                    customer: customer,
+                    customerAttrValues: attributes
+                },
                 callback: function(){
                     Ext.Msg.alert(loc.status, loc.customers.success);
                 }
             });
-            log(values);
         }
 
         function reset(){
