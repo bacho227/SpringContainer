@@ -250,6 +250,13 @@
             <version>1.4.7</version>
         </dependency>
 
+        <!--Mongo DB-->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>2.13.0</version>
+        </dependency>
+
     </dependencies>
 
 </project>
