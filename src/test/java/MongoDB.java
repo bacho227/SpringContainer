@@ -15,6 +15,8 @@ public class MongoDB {
 	private static final int PORT = 27017;
 	private static String dbName = "mydb";
 	private static String collectionName = "testData";
+	private static String COLL_TMP = "tmp";
+	private static String COLL_FS = "fs";
 
 	private static GridFS gridFS;
 	private static DB db;
@@ -37,10 +39,14 @@ public class MongoDB {
 	}
 	public static void upload() throws IOException {
 		File file = new File("/home/vano/IdeaProjects/SpringContainer/src/test/resources/test.png");
-		gridFS = new GridFS(db, "tmp");
+		gridFS = new GridFS(db, COLL_TMP);
 		GridFSInputFile inputFile = gridFS.createFile(file);
 
 		inputFile.setContentType("image/png");
 		inputFile.save();
+	}
+	public DBCursor getFiles() {
+		DBCollection collection = db.getCollection(COLL_FS + ".files");
+		return collection.find();
 	}
 }
