@@ -3,12 +3,15 @@ package ge.softgen.loanexpert.params.customer;
 import ge.softgen.loanexpert.model.Customer;
 import ge.softgen.loanexpert.model.CustomerAttrValue;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by bacho on 3/15/15.
  */
-public class SaveCustomerParams {
+public class SaveCustomerParams implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	private Customer customer;
 	private List<CustomerAttrValue> customerAttrValues;
 

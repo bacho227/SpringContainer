@@ -2,8 +2,7 @@ package ge.softgen.loanexpert.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.Arrays;
+import java.sql.Date;
 
 /**
  * Created by Bacho on 3/6/15.
@@ -75,15 +74,15 @@ public class Customer implements Serializable {
 		this.fullName = fullName;
 	}
 
-	private Timestamp birthDate;
+	private Date birthDate;
 
 	@Basic
 	@javax.persistence.Column(name = "BIRTH_DATE")
-	public Timestamp getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Timestamp birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -207,27 +206,27 @@ public class Customer implements Serializable {
 		this.docIssuer = docIssuer;
 	}
 
-	private Timestamp docIssueDate;
+	private Date docIssueDate;
 
 	@Basic
 	@javax.persistence.Column(name = "DOC_ISSUE_DATE")
-	public Timestamp getDocIssueDate() {
+	public Date getDocIssueDate() {
 		return docIssueDate;
 	}
 
-	public void setDocIssueDate(Timestamp docIssueDate) {
+	public void setDocIssueDate(Date docIssueDate) {
 		this.docIssueDate = docIssueDate;
 	}
 
-	private Timestamp docValidDate;
+	private Date docValidDate;
 
 	@Basic
 	@javax.persistence.Column(name = "DOC_VALID_DATE")
-	public Timestamp getDocValidDate() {
+	public Date getDocValidDate() {
 		return docValidDate;
 	}
 
-	public void setDocValidDate(Timestamp docValidDate) {
+	public void setDocValidDate(Date docValidDate) {
 		this.docValidDate = docValidDate;
 	}
 

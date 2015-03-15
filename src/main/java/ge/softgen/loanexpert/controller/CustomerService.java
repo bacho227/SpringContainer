@@ -1,17 +1,16 @@
 package ge.softgen.loanexpert.controller;
 
-import ge.softgen.loanexpert.model.Customer;
-import ge.softgen.loanexpert.model.CustomerAttrType;
-import ge.softgen.loanexpert.model.GenParam;
-import ge.softgen.loanexpert.model.SecUser;
+import ge.softgen.loanexpert.model.*;
 import ge.softgen.loanexpert.model.forms.Client;
 import ge.softgen.loanexpert.params.customer.SaveCustomerParams;
 import ge.softgen.loanexpert.repository.customer.CustomerAttrTypesRepository;
+import ge.softgen.loanexpert.repository.customer.CustomerAttrValuesRepository;
 import ge.softgen.loanexpert.repository.customer.CustomerRepository;
 import ge.softgen.loanexpert.repository.customer.GenParamsRepository;
 import ge.softgen.loanexpert.security.annotation.Access;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityManager;
@@ -34,12 +33,22 @@ public class CustomerService {
 	private CustomerAttrTypesRepository customerAttrTypesRepository;
 
 	@Autowired
+	private CustomerAttrValuesRepository customerAttrValuesRepository;
+
+	@Autowired
 	private GenParamsRepository genParamsRepository;
 
 	@ResponseBody
 	@RequestMapping(value = "saveCustomer")
+	@Transactional(rollbackFor = Exception.class)
 	public Customer saveCustomer(@RequestBody SaveCustomerParams saveCustomerParams) {
-		return customerRepository.save(saveCustomerParams.getCustomer());
+		Customer customer = customerRepository.save(saveCustomerParams.getCustomer());
+		List<CustomerAttrValue> customerAttrValues = saveCustomerParams.getCustomerAttrValues();
+		for (CustomerAttrValue customerAttrValue : customerAttrValues) {
+			customerAttrValue.setCustomerId(customer.getId());
+		}
+		customerAttrValuesRepository.save(customerAttrValues);
+		return customer;
 	}
 
 	@ResponseBody
