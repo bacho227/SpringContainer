@@ -67,7 +67,7 @@ Ext.define('LE.view.customers.CustomerForm', {
                 xtype: 'combo',
                 fieldLabel: loc.status,
                 name: 'status',
-                disabled: true,
+                //disabled: true,
                 displayField: 'name',
                 valueField: 'id',
                 queryMode: 'local',

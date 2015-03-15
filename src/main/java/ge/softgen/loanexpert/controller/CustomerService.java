@@ -5,6 +5,7 @@ import ge.softgen.loanexpert.model.CustomerAttrType;
 import ge.softgen.loanexpert.model.GenParam;
 import ge.softgen.loanexpert.model.SecUser;
 import ge.softgen.loanexpert.model.forms.Client;
+import ge.softgen.loanexpert.params.customer.SaveCustomerParams;
 import ge.softgen.loanexpert.repository.customer.CustomerAttrTypesRepository;
 import ge.softgen.loanexpert.repository.customer.CustomerRepository;
 import ge.softgen.loanexpert.repository.customer.GenParamsRepository;
@@ -37,8 +38,8 @@ public class CustomerService {
 
 	@ResponseBody
 	@RequestMapping(value = "saveCustomer")
-	public Customer saveCustomer(@RequestBody Customer customer) {
-		return customerRepository.save(customer);
+	public Customer saveCustomer(@RequestBody SaveCustomerParams saveCustomerParams) {
+		return customerRepository.save(saveCustomerParams.getCustomer());
 	}
 
 	@ResponseBody

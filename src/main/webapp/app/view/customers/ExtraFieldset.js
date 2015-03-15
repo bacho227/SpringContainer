@@ -86,7 +86,7 @@ Ext.define('LE.view.customers.ExtraFieldset', {
             }, {
                 fieldLabel: loc.customers.mobile,
                 name: 'mobile',
-                disabled: true,
+                //disabled: true,
                 vtype: 'mobile'
             }, {
                 fieldLabel: loc.customers.email,
