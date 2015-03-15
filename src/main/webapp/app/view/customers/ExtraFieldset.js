@@ -16,6 +16,12 @@ Ext.define('LE.view.customers.ExtraFieldset', {
                 { id: 2, name: 'ბიზნესი'}
             ]
         });
+        var docTypeStore = Ext.create('Ext.data.Store', {
+            fields: ['id', 'name'],
+            data: [
+                {id: 1, name: 'პირადობა'}
+            ]
+        });
 
         var fieldset1 = Ext.create('Ext.form.FieldSet', {
             border: false,
@@ -30,7 +36,7 @@ Ext.define('LE.view.customers.ExtraFieldset', {
             }, {
                 xtype: 'combo',
                 fieldLabel: loc.customers.financialSector,
-                name: 'financialSector',
+                name: 'customerFinSec',
                 displayField: 'name',
                 valueField: 'id',
                 queryMode: 'local',
@@ -41,13 +47,19 @@ Ext.define('LE.view.customers.ExtraFieldset', {
                 name: 'address'
             }, {
                 fieldLabel: loc.customers.legalAddress,
-                name: 'legalAddress'
+                name: 'juridicalAddress'
             }, {
+                xtype: 'combo',
                 fieldLabel: loc.customers.docType,
-                name: 'docType'
+                name: 'docType',
+                store: docTypeStore,
+                displayField: 'name',
+                valueField: 'id',
+                queryMode: 'local',
+                editable: false,
             }, {
                 fieldLabel: loc.customers.docNo,
-                name: 'docNo'
+                name: 'docNumber'
             }, {
                 fieldLabel: loc.customers.docIssuer,
                 name: 'docIssuer'
@@ -74,6 +86,7 @@ Ext.define('LE.view.customers.ExtraFieldset', {
             }, {
                 fieldLabel: loc.customers.mobile,
                 name: 'mobile',
+                disabled: true,
                 vtype: 'mobile'
             }, {
                 fieldLabel: loc.customers.email,
@@ -82,11 +95,7 @@ Ext.define('LE.view.customers.ExtraFieldset', {
             }, {
                 xtype: 'textareafield',
                 fieldLabel: loc.note,
-                name: 'note'
-            }, {
-                xtype: 'filefield',
-                fieldLabel: loc.customers.photo,
-                name: 'photo'
+                name: 'comments'
             }]
         });
 

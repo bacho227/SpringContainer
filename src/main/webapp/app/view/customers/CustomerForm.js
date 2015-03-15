@@ -1,12 +1,12 @@
 Ext.define('LE.view.customers.CustomerForm', {
     extend: 'Ext.form.Panel',
-    //bodyPadding: 5,
+    bodyPadding: 5,
     width: 800,
     //frame: true,
     //title: loc.customers.addClient,
     fieldDefaults: {
         labelWidth: 180,
-        labelAlign: 'left',
+        labelAlign: 'right',
         anchor: '100%'
     },
     constructor: function (cfg) {
@@ -21,6 +21,14 @@ Ext.define('LE.view.customers.CustomerForm', {
             ]
         });
 
+        var genderStore = Ext.create('Ext.data.Store', {
+            fields: ['id', 'name'],
+            data: [
+                {id: 0, name: 'აირჩიეთ...'},
+                {id: 1, name: 'მამრობითი'},
+                {id: 2, name: 'მდედრობითი'}
+            ]
+        });
         var statusStore = Ext.create('Ext.data.Store', {
             fields: ['id', 'name'],
             data: [
@@ -41,12 +49,16 @@ Ext.define('LE.view.customers.CustomerForm', {
             items: [{
                 xtype: 'combo',
                 fieldLabel: loc.type,
-                name: 'type',
+                name: 'customerType',
                 store: typeStore,
                 displayField: 'name',
                 valueField: 'id',
                 queryMode: 'local',
                 editable: false
+            }, {
+                fieldLabel: loc.customers.legalName,
+                name: 'fullName',
+                hidden: true
             }, {
                 fieldLabel: loc.customers.personalNo,
                 name: 'personalNo',
@@ -55,6 +67,7 @@ Ext.define('LE.view.customers.CustomerForm', {
                 xtype: 'combo',
                 fieldLabel: loc.status,
                 name: 'status',
+                disabled: true,
                 displayField: 'name',
                 valueField: 'id',
                 queryMode: 'local',
@@ -81,20 +94,60 @@ Ext.define('LE.view.customers.CustomerForm', {
                 fieldLabel: loc.customers.birthDate,
                 name: 'birthDate',
                 vtype: 'birthdate'
+            }, {
+                xtype: 'combo',
+                name: 'gender',
+                fieldLabel: loc.customers.gender,
+                store: genderStore,
+                displayField: 'name',
+                valueField: 'id',
+                queryMode: 'local',
+                editable: false
+            }, {
+                xtype: 'hiddenfield',
+                name: 'photo'
             }]
         });
 
         var extraFieldset = Ext.create("LE.view.customers.ExtraFieldset");
 
+        var attributesFieldset = Ext.create('LE.view.customers.AttributesFieldset');
+
         me.items = [{
+            xtype: 'fieldcontainer',
+            layout: 'hbox',
+            padding: 5,
+            items: [{
+                xtype: 'radio',
+                name: 'isJuridical',
+                boxLabel: 'ფიზიკური',
+                checked: true,
+                inputValue: 0,
+                width: 120
+            }, {
+                xtype: 'radio',
+                name: 'isJuridical',
+                inputValue: 1,
+                boxLabel: 'იურიდიული',
+                listeners: {
+                    change: function(f, val){
+                        changeType(val);
+                    }
+                }
+            }]
+        }, {
             xtype: 'panel',
             border: false,
             layout: 'hbox',
             bodyPadding: 15,
-            items: [ fieldset1, fieldset2 ]
-        }, extraFieldset];
+            items: [fieldset1, fieldset2 ]
+        }, extraFieldset, attributesFieldset];
 
         me.buttons = [{
+            xtype: 'button',
+            text: loc.customers.photo,
+            handler: openPhoto
+        }, '->', {
             text: loc.reset,
             handler: reset
         }, {
@@ -105,12 +158,63 @@ Ext.define('LE.view.customers.CustomerForm', {
 
         me.callParent(arguments);
 
+        changeType();
+
         function save(){
             if(!me.isValid()) return ;
+            var values = me.getForm().getValues();
+            values.isResident = values.isResident ? 1 : 0;
+            correctDates(values, ['birthDate', 'docIssueDate', 'docValidDate']);
+            // TODO მისამატებელია ატრიბუტები
+            delete values.attributes;
+            //values.attributes = attributesFieldset.getValues();
+            myRequest({
+                url: '/rest/customer/saveCustomer',
+                jsonData: values,
+                callback: function(){
+                    Ext.Msg.alert(loc.status, loc.customers.success);
+                }
+            });
+            log(values);
         }
 
         function reset(){
             me.reset();
+        }
+
+        function changeType(isLE){ // isLegalEntity
+            var personalNo = me.down('[name=personalNo]');
+            var firstName = me.down('[name=firstName]');
+            var lastName = me.down('[name=lastName]');
+            var birthDate = me.down('[name=birthDate]');
+            var gender = me.down('[name=gender]');
+            var fullName = me.down('[name=fullName]');
+
+            personalNo.allowBlank = !!isLE;
+            firstName.allowBlank = !!isLE;
+            lastName.allowBlank = !!isLE;
+            birthDate.allowBlank = !!isLE;
+            gender.allowBlank = !!isLE;
+            fullName.allowBlank = !isLE;
+
+            if(isLE) { // isLegalEntity
+                personalNo.hide();
+                firstName.hide();
+                lastName.hide();
+                birthDate.hide();
+                gender.hide();
+                fullName.show();
+            } else {
+                personalNo.show();
+                firstName.show();
+                lastName.show();
+                birthDate.show();
+                gender.show();
+                fullName.hide();
+            }
+        }
+        function openPhoto(){
+
         }
     }
 });

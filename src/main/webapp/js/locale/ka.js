@@ -24,7 +24,8 @@ var loc = {
     invalidName: 'არასწორი სახელი',
     save: 'შენახვა',
     cancel: 'გაუქმება',
-    reset: 'გასუფთავება'
+    reset: 'გასუფთავება',
+    attributes: 'ატრიბუტები'
 };
 
 loc.menu = {
@@ -58,7 +59,9 @@ loc.customers = {
     mobile: 'მობილური',
     email: 'ელ. ფოსტა',
     photo: 'ფოტო',
-    isResident: 'არარეზიდენტი'
+    isResident: 'არარეზიდენტი',
+    gender: 'სქესი',
+    success: 'კლიენტი წარმატებით დარეგისტრირდა'
 }
 
 loc.collaterals = {

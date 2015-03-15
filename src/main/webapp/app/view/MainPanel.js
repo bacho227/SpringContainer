@@ -22,6 +22,7 @@ Ext.define('LE.view.MainPanel', {
         var center = Ext.create('Ext.panel.Panel', {
             region: 'center',
             bodyPadding: 10,
+            autoScroll: true,
             items: [ Ext.create('LE.view.customers.CustomerForm')]
         });
 

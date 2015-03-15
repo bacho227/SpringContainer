@@ -24,7 +24,8 @@ var loc = {
     invalidName: 'Invalid Name',
     save: 'Save',
     cancel: 'Cancel',
-    reset: 'Reset'
+    reset: 'Reset',
+    attributes: 'Attributes'
 };
 
 loc.menu = {
@@ -58,7 +59,9 @@ loc.customers = {
     mobile: 'Mobile number',
     email: 'Email',
     photo: 'Photo',
-    isResident: 'Not Resident'
+    isResident: 'Not Resident',
+    gender: 'Gender',
+    success: 'Customer was registered successfully'
 }
 
 loc.collaterals = {

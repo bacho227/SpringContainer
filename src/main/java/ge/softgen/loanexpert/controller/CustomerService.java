@@ -36,25 +36,25 @@ public class CustomerService {
 	private GenParamsRepository genParamsRepository;
 
 	@ResponseBody
-	@RequestMapping(value = "saveCustomer", method = RequestMethod.POST)
+	@RequestMapping(value = "saveCustomer")
 	public Customer saveCustomer(@RequestBody Customer customer) {
 		return customerRepository.save(customer);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "deleteCustomerById", method = RequestMethod.POST)
+	@RequestMapping(value = "deleteCustomerById")
 	public void deleteCustomerById(@RequestParam Integer id) {
 		customerRepository.deleteById(id);
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "getCustomerAttrTypes", method = RequestMethod.POST)
+	@RequestMapping(value = "getCustomerAttrTypes")
 	public List<CustomerAttrType> getCustomerAttrTypes() {
 		return customerAttrTypesRepository.findAll();
 	}
 
 	@ResponseBody
-	@RequestMapping(value = "getGenParamsByHeader", method = RequestMethod.POST)
+	@RequestMapping(value = "getGenParamsByHeader")
 	public List<GenParam> getGenParamsByHeader(@RequestParam String header) {
 		return genParamsRepository.findByHeader(header);
 	}
