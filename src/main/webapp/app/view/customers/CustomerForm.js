@@ -145,7 +145,7 @@ Ext.define('LE.view.customers.CustomerForm', {
 
         me.buttons = [{
             xtype: 'button',
-            text: loc.customers.photo,
+            text: loc.customers.file,
             handler: openPhoto
         }, '->', {
             text: loc.reset,
@@ -214,7 +214,9 @@ Ext.define('LE.view.customers.CustomerForm', {
             }
         }
         function openPhoto(){
-
+            Ext.create('LE.view.customers.FileWindow', {
+                customerForm: me
+            });
         }
     }
 });

@@ -58,10 +58,11 @@ loc.customers = {
     phone: 'Phone number',
     mobile: 'Mobile number',
     email: 'Email',
-    photo: 'Photo',
+    file: 'File',
     isResident: 'Not Resident',
     gender: 'Gender',
-    success: 'Customer was registered successfully'
+    success: 'Customer was registered successfully',
+    upload: 'Upload'
 }
 
 loc.collaterals = {

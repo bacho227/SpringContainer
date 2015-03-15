@@ -58,10 +58,11 @@ loc.customers = {
     phone: 'ტელეფონი',
     mobile: 'მობილური',
     email: 'ელ. ფოსტა',
-    photo: 'ფოტო',
+    file: 'ფაილი',
     isResident: 'არარეზიდენტი',
     gender: 'სქესი',
-    success: 'კლიენტი წარმატებით დარეგისტრირდა'
+    success: 'კლიენტი წარმატებით დარეგისტრირდა',
+    upload: 'ატვირთვა'
 }
 
 loc.collaterals = {
