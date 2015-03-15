@@ -78,6 +78,7 @@ Ext.define('LE.view.customers.AttributesFieldset', {
                 if(fields[i].xtype == 'datefield'){
                     obj.value = obj.value ? obj.value.getTime() : null;
                 }
+                obj.value = obj.value + '';
                 data.push(obj);
             }
             return data;

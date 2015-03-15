@@ -168,12 +168,14 @@ Ext.define('LE.view.customers.CustomerForm', {
             // TODO მისამატებელია ატრიბუტები
             delete customer.attributes;
             var attributes = attributesFieldset.getValues();
+            var obj = {
+                customer: customer,
+                customerAttrValues: attributes
+            };
+            log(obj);
             myRequest({
                 url: '/rest/customer/saveCustomer',
-                jsonData: {
-                    customer: customer,
-                    customerAttrValues: attributes
-                },
+                jsonData: obj,
                 callback: function(){
                     Ext.Msg.alert(loc.status, loc.customers.success);
                 }
