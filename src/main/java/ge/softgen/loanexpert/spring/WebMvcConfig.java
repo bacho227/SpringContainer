@@ -4,6 +4,10 @@ import static ge.softgen.loanexpert.spring.ApplicationConfig.getConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.orm.jpa.JpaProperties;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
+import org.springframework.cache.support.SimpleCacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -13,16 +17,22 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.config.annotation.*;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Configuration
 @EnableWebMvc
+@EnableCaching
+@EnableTransactionManagement
 //@EnableSpringDataWebSupport
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
+	public static final String[] cacheNames = {"customerAttrTypes", "GenParamByHeader"};
 
 	@Autowired
 	private AccessInterceptor accessInterceptor;
@@ -81,4 +91,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return transactionManager;
 	}
 
+	@Bean
+	public CacheManager cacheManager() {
+		List<ConcurrentMapCache> concurrentCaches = new ArrayList();
+		for (String cacheName : cacheNames) {
+			concurrentCaches.add(new ConcurrentMapCache(cacheName));
+		}
+		SimpleCacheManager cacheManager = new SimpleCacheManager();
+		cacheManager.setCaches(concurrentCaches);
+		return cacheManager;
+	}
 }

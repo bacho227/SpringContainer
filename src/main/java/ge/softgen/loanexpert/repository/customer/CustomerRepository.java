@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by Bacho on 3/13/15.
  */
-public interface CustomerRepository extends CrudRepository<Customer, Long> {
+public interface CustomerRepository extends CrudRepository<Customer, Integer> {
 	@Modifying
 	@Transactional
 	@Query("DELETE FROM Customer t WHERE t.id = :id")

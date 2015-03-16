@@ -10,5 +10,5 @@ import java.util.List;
 /**
  * Created by bacho on 3/15/15.
  */
-public interface CustomerAttrValuesRepository extends CrudRepository<CustomerAttrValue, Long> {
+public interface CustomerAttrValuesRepository extends CrudRepository<CustomerAttrValue, Integer> {
 }

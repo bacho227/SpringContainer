@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by bacho on 3/15/15.
  */
-public class SaveCustomerParams implements Serializable {
+public class SaveCustomerParam implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Customer customer;
