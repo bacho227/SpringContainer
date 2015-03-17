@@ -1,11 +1,12 @@
 Ext.define('LE.view.customers.CustomerForm', {
     extend: 'Ext.form.Panel',
     bodyPadding: 5,
-    width: 800,
+    margin: 5,
+    width: 700,
     //frame: true,
     //title: loc.customers.addClient,
     fieldDefaults: {
-        labelWidth: 180,
+        labelWidth: 150,
         labelAlign: 'right',
         anchor: '100%'
     },
@@ -13,36 +14,15 @@ Ext.define('LE.view.customers.CustomerForm', {
         cfg = cfg || {};
         var me = this;
 
-        var typeStore = Ext.create('Ext.data.Store', {
-            fields: ['id', 'name'],
-            data: [
-                { id: 1, name: '1'},
-                { id: 2, name: '2'}
-            ]
-        });
-
-        var genderStore = Ext.create('Ext.data.Store', {
-            fields: ['id', 'name'],
-            data: [
-                {id: 0, name: 'აირჩიეთ...'},
-                {id: 1, name: 'მამრობითი'},
-                {id: 2, name: 'მდედრობითი'}
-            ]
-        });
-        var statusStore = Ext.create('Ext.data.Store', {
-            fields: ['id', 'name'],
-            data: [
-                { id: 1, name: 'VIP კლიენტი'},
-                { id: 2, name: 'შავი სია'},
-                { id: 3, name: 'ნორმალური'},
-                { id: 4, name: 'ახალი'},
-                { id: 5, name: 'სხვა'}
-            ]
-        });
+        var typeStore = Ext.create('LE.store.customers.TypeStore');
+        var statusStore = Ext.create('LE.store.ParamStore');
+            statusStore.setHeader('CUSTOMER_STATUS');
+        var genderStore = Ext.create('LE.store.GenderStore');
 
 
         var fieldset1 = Ext.create('Ext.form.FieldSet', {
             border: false,
+            flex: 1,
             defaults: {
                 xtype: 'textfield'
             },
@@ -51,14 +31,14 @@ Ext.define('LE.view.customers.CustomerForm', {
                 fieldLabel: loc.type,
                 name: 'customerType',
                 store: typeStore,
-                displayField: 'name',
+                displayField: 'descrip',
                 valueField: 'id',
                 queryMode: 'local',
                 editable: false
             }, {
                 fieldLabel: loc.customers.legalName,
-                name: 'fullName',
-                hidden: true
+                name: 'fullName'
+                //hidden: true
             }, {
                 fieldLabel: loc.customers.personalNo,
                 name: 'personalNo',
@@ -68,9 +48,8 @@ Ext.define('LE.view.customers.CustomerForm', {
                 fieldLabel: loc.status,
                 name: 'status',
                 //disabled: true,
-                displayField: 'name',
+                displayField: 'descrip',
                 valueField: 'id',
-                queryMode: 'local',
                 editable: false,
                 store: statusStore
             }]
@@ -78,6 +57,7 @@ Ext.define('LE.view.customers.CustomerForm', {
 
         var fieldset2 = Ext.create('Ext.form.FieldSet', {
             border: false,
+            flex: 1,
             defaults: {
                 xtype: 'textfield'
             },
@@ -139,7 +119,7 @@ Ext.define('LE.view.customers.CustomerForm', {
             xtype: 'panel',
             border: false,
             layout: 'hbox',
-            bodyPadding: 15,
+            bodyPadding: '0 15 0 15',
             items: [fieldset1, fieldset2 ]
         }, extraFieldset, attributesFieldset];
 
@@ -165,7 +145,6 @@ Ext.define('LE.view.customers.CustomerForm', {
             var customer = me.getForm().getValues();
             customer.isResident = customer.isResident ? 1 : 0;
             correctDates(customer, ['birthDate', 'docIssueDate', 'docValidDate']);
-            // TODO მისამატებელია ატრიბუტები
             delete customer.attributes;
             var attributes = attributesFieldset.getValues();
             var obj = {
@@ -173,6 +152,7 @@ Ext.define('LE.view.customers.CustomerForm', {
                 customerAttrValues: attributes
             };
             log(obj);
+
             myRequest({
                 url: '/rest/customer/saveCustomer',
                 jsonData: obj,
@@ -202,25 +182,28 @@ Ext.define('LE.view.customers.CustomerForm', {
             fullName.allowBlank = !isLE;
 
             if(isLE) { // isLegalEntity
-                personalNo.hide();
-                firstName.hide();
-                lastName.hide();
-                birthDate.hide();
-                gender.hide();
-                fullName.show();
+                personalNo.disable();
+                firstName.disable();
+                lastName.disable();
+                birthDate.disable();
+                gender.disable();
+                fullName.enable();
             } else {
-                personalNo.show();
-                firstName.show();
-                lastName.show();
-                birthDate.show();
-                gender.show();
-                fullName.hide();
+                personalNo.enable();
+                firstName.enable();
+                lastName.enable();
+                birthDate.enable();
+                gender.enable();
+                fullName.disable();
             }
         }
         function openPhoto(){
-            Ext.create('LE.view.customers.FileWindow', {
-                customerForm: me
-            });
+            if(!me.fileWindow) {
+                me.fileWindow = Ext.create('LE.view.customers.FileWindow', {
+                    customerForm: me
+                });
+            }
+            me.fileWindow.show();
         }
     }
 });

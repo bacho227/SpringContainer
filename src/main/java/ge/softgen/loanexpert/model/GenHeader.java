@@ -1,10 +1,12 @@
 package ge.softgen.loanexpert.model;
 
-import ge.softgen.loanexpert.spring.ApplicationConfig;
-
-import javax.persistence.*;
 import java.io.Serializable;
-import java.math.BigDecimal;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * Created by Bacho on 3/6/15.
@@ -14,21 +16,10 @@ import java.math.BigDecimal;
 public class GenHeader implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private BigDecimal id;
 	private String header;
 	private String descrip;
 
 	@Id
-	@Column(name = "ID")
-	public BigDecimal getId() {
-		return id;
-	}
-
-	public void setId(BigDecimal id) {
-		this.id = id;
-	}
-
-	@Basic
 	@Column(name = "HEADER")
 	public String getHeader() {
 		return header;
@@ -57,15 +48,13 @@ public class GenHeader implements Serializable {
 
 		if (descrip != null ? !descrip.equals(genHeader.descrip) : genHeader.descrip != null) return false;
 		if (header != null ? !header.equals(genHeader.header) : genHeader.header != null) return false;
-		if (id != null ? !id.equals(genHeader.id) : genHeader.id != null) return false;
 
 		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = id != null ? id.hashCode() : 0;
-		result = 31 * result + (header != null ? header.hashCode() : 0);
+		int result = header != null ? header.hashCode() : 0;
 		result = 31 * result + (descrip != null ? descrip.hashCode() : 0);
 		return result;
 	}

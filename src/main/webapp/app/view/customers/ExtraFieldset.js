@@ -16,15 +16,12 @@ Ext.define('LE.view.customers.ExtraFieldset', {
                 { id: 2, name: 'ბიზნესი'}
             ]
         });
-        var docTypeStore = Ext.create('Ext.data.Store', {
-            fields: ['id', 'name'],
-            data: [
-                {id: 1, name: 'პირადობა'}
-            ]
-        });
+        var docTypeStore = Ext.create('LE.store.ParamStore');
+        docTypeStore.setHeader('DOC_TYPE');
 
         var fieldset1 = Ext.create('Ext.form.FieldSet', {
             border: false,
+            flex: 1,
             defaults: {
                 xtype: 'textfield'
             },
@@ -53,10 +50,10 @@ Ext.define('LE.view.customers.ExtraFieldset', {
                 fieldLabel: loc.customers.docType,
                 name: 'docType',
                 store: docTypeStore,
-                displayField: 'name',
+                displayField: 'descrip',
                 valueField: 'id',
                 queryMode: 'local',
-                editable: false,
+                editable: false
             }, {
                 fieldLabel: loc.customers.docNo,
                 name: 'docNumber'
@@ -68,6 +65,7 @@ Ext.define('LE.view.customers.ExtraFieldset', {
 
         var fieldset2 = Ext.create('Ext.form.FieldSet', {
             border: false,
+            flex: 1,
             defaults: {
                 xtype: 'textfield'
             },

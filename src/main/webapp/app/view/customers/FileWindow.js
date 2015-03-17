@@ -4,13 +4,21 @@ Ext.define('LE.view.customers.FileWindow', {
     height: '80%',
     autoShow: true,
     modal: true,
-    layout: 'anchor',
+    layout: 'fit',
     autoScroll: true,
-    maximizable: true,
+    //maximizable: true,
     title: loc.customers.file,
     constructor: function (cfg) {
         cfg = cfg || {};
         var me = this;
+
+        var fileView = Ext.create('Ext.Component', {
+            autoEl: {
+                tag: 'iframe',
+                cls: 'customer-file-view',
+                src: ''
+            }
+        });
 
         var form = Ext.create('Ext.form.Panel', {
             bodyPadding: 5,
@@ -22,29 +30,43 @@ Ext.define('LE.view.customers.FileWindow', {
                 listeners: {
                     change: upload
                 }
-            }]
+            }, fileView]
         });
 
-        var fileViewPanel = Ext.create('Ext.panel.Panel', {
-            border: false,
-            items: [{
-                xtype: 'component',
-                autoEl: {
-                    tag: 'iframe',
-                    cls: 'customer-file-view',
-                    style: 'border: 0; width: 100%',
-                    src: ''
-                }
-            }]
-        });
 
-        me.items = [ form, fileViewPanel ];
+
+        me.items = [ form ];
+
+        me.buttons = [{
+            text: 'Ok',
+            handler: function(){
+                setPhoto("photoid");
+            }
+        }, {
+            text: 'გაუქმება',
+            handler: function(){
+                setPhoto();
+            }
+        }];
 
         me.callParent(arguments);
 
         function upload(){
-            log('upload')
-            Ext.query('iframe.customer-file-view')[0].src = 'images/softgen-logo.png'
+            log('upload');
+            setIframeSrc('images/softgen-logo.png');
+
+
+        }
+        function setPhoto(photoId){
+            if(!photoId){
+                setIframeSrc();
+                form.reset();
+            }
+            cfg.customerForm.getForm().setValues({photo: photoId || ''});
+            me.hide();
+        }
+        function setIframeSrc(src){
+            Ext.query('iframe.customer-file-view')[0].src = src || '';
         }
     }
 });

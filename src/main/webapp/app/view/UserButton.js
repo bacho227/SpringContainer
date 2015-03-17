@@ -52,6 +52,10 @@ Ext.define('LE.view.UserButton', {
 
         me.text = le.user.firstName + ' ' + le.user.lastName;
         me.menu = [themeCombo, langCombo, {
+            text: 'glyphs',
+            handler: openGlyphs,
+            glyph: g.get(g.gears)
+        }, {
             xtype: 'menuseparator'
         }, {
             text: loc.logout,
@@ -59,5 +63,29 @@ Ext.define('LE.view.UserButton', {
             handler: logout
         }];
         me.callParent(arguments);
+
+        function openGlyphs(){
+            btns = [];
+            for(var i in g){
+                if(typeof g[i] == 'string'){
+                    var btn = Ext.create('Ext.button.Button', {
+                        glyph: g.get(g[i]),
+                        text: g[i] + ' - ' + i,
+                        width: 140,
+                        scale: 'large',
+                        textAlign: 'left',
+                        iconAlign: 'left'
+                    });
+                    btns.push(btn);
+                }
+            }
+            Ext.create('Ext.window.Window', {
+                autoShow: true,
+                title:  'glyphs',
+                bodyPadding: 5,
+                width: 500,
+                items: btns
+            });
+        }
     }
 });

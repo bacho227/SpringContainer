@@ -23,7 +23,14 @@ Ext.define('LE.view.MainPanel', {
             region: 'center',
             bodyPadding: 10,
             autoScroll: true,
-            items: [ Ext.create('LE.view.customers.CustomerForm')]
+            items: [
+                Ext.create('LE.view.collateral.CollateralForm', {
+                    title: loc.collaterals.addCollateral
+                }),
+                Ext.create('LE.view.customers.CustomerForm', {
+                    title: loc.customers.addClient
+                })
+            ]
         });
 
         me.items = [ header, menu, center ];

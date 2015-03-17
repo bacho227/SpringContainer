@@ -5,19 +5,19 @@
 	border: 1px solid #9EB0E0;
 	float: left;
 	text-align: center;
-	margin: 0px 5px 5px 0px;
+	margin: 0 5px 5px 0;
 	background-color: #AED8F8;
 	color: #555;
 	font-size: 11px;
 	font-weight: bold;
-	box-shadow: 0px 0px 2px 0px #AAA;
+	box-shadow: 0 0 2px 0 #AAA;
 	cursor: default;
 }
 
 .test-no-item:hover {
 	background-color: #FFE288;
 	color: #555;
-	box-shadow: 0px 0px 5px 1px #AAA;
+	box-shadow: 0 0 5px 1px #AAA;
 }
 
 .test-no-item-selected {
@@ -67,8 +67,8 @@
 .print-results-table td{
 	text-align: center;
 	font-size: 10px;
-	border: 0px solid black;
-	padding: 0px;
+	border: 0 solid black;
+	padding: 0;
 }
 
 .form-micro .x-anchor-form-item {
@@ -92,7 +92,7 @@
     bottom: 0;
     width: 250px;
     height: 90px;
-    border: 0px solid #eee;
+    border: 0 solid #eee;
     padding: 30px;
     border-radius: 3px;
     box-shadow: 1px 1px 7px -1px #888;
@@ -119,4 +119,9 @@
 }
 .login-form input[type=submit]:active{
     background: #ddd;
+}
+.customer-file-view{
+    border: 1px solid #ccc;
+    width: 100%;
+    height: calc(100% - 27px);
 }

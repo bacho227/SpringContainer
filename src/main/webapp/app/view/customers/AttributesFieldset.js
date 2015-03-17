@@ -23,7 +23,7 @@ Ext.define('LE.view.customers.AttributesFieldset', {
         me.callParent(arguments);
 
         attrStore.on('load', function(){
-            attrStore.each(function(rec, ind){
+            attrStore.each(function(rec){
                 var field = createField(rec);
                 me.add(field);
             });
@@ -50,16 +50,15 @@ Ext.define('LE.view.customers.AttributesFieldset', {
                     break;
                 case 4:
                     var store = Ext.create('LE.store.ParamStore');
-                    store.getProxy().extraParams = {
+                    store.setHeader({
                         header: rec.get('attrlist')
-                    };
+                    });
                     opt.editable = false;
                     opt.queryMode = 'local';
                     opt.displayField = 'descrip';
                     opt.valueField = 'id';
                     opt.store = store;
                     field = Ext.create('Ext.form.field.ComboBox', opt);
-                    store.load();
                     break;
                 default:
                     field = Ext.create('Ext.form.field.Text', opt);

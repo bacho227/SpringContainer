@@ -9,5 +9,11 @@ Ext.define('LE.store.ParamStore', {
         reader: {
             type: 'json'
         }
+    },
+    setHeader: function(header){
+        this.getProxy().extraParams = {
+            header: header
+        };
+        this.load();
     }
 });

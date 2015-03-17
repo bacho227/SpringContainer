@@ -12,7 +12,6 @@ var loc = {
     logout : 'გამოსვლა',
     close: 'დახურვა',
     extraParams: 'დამატებითი პარამეტრები',
-    language: 'ენა',
     other: 'სხვა',
     note: 'შენიშვნა',
     type: 'ტიპი',
@@ -46,7 +45,7 @@ loc.customers = {
     firstName: 'სახელი',
     lastName: 'გვარი',
     birthDate: 'დაბ. თარიღი',
-    legalName: 'იურ. დასახელება და წარმ.',
+    legalName: 'იურ. პირის. დას.',
     financialSector: 'ფინანსური სექტორი',
     address: 'მისამართი',
     legalAddress: 'იურიდ. მისამართი',
@@ -63,7 +62,7 @@ loc.customers = {
     gender: 'სქესი',
     success: 'კლიენტი წარმატებით დარეგისტრირდა',
     upload: 'ატვირთვა'
-}
+};
 
 loc.collaterals = {
     addCollateral: 'უზრუნველყოფის რეგისტრაცია',

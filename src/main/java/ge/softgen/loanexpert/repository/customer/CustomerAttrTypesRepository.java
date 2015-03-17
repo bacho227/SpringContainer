@@ -2,7 +2,6 @@ package ge.softgen.loanexpert.repository.customer;
 
 
 import ge.softgen.loanexpert.model.CustomerAttrType;
-import ge.softgen.loanexpert.spring.CustomCacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.CrudRepository;
 
