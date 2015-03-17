@@ -8,6 +8,7 @@ Ext.define('LE.view.customers.FileWindow', {
     autoScroll: true,
     //maximizable: true,
     title: loc.customers.file,
+    onEsc: function(){ this.hide(); },
     constructor: function (cfg) {
         cfg = cfg || {};
         var me = this;
@@ -39,11 +40,13 @@ Ext.define('LE.view.customers.FileWindow', {
 
         me.buttons = [{
             text: 'Ok',
+            glyph: g.get(g.check),
             handler: function(){
                 setPhoto("photoid");
             }
         }, {
             text: 'გაუქმება',
+            glyph: g.get(g.close),
             handler: function(){
                 setPhoto();
             }

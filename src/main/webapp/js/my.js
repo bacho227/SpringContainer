@@ -279,5 +279,6 @@ window.g = {
     loans: 'f0d6',
     card: 'f09d',
     logout: 'f08b',
-    brush: 'f1fc'
+    brush: 'f1fc',
+    clip: 'f0c6'
 };

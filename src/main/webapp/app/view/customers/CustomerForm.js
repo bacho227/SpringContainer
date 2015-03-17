@@ -125,10 +125,12 @@ Ext.define('LE.view.customers.CustomerForm', {
 
         me.buttons = [{
             xtype: 'button',
+            glyph: g.get(g.clip),
             text: loc.customers.file,
             handler: openPhoto
         }, '->', {
             text: loc.reset,
+            glyph: g.get(g.refresh),
             handler: reset
         }, {
             text: loc.save,

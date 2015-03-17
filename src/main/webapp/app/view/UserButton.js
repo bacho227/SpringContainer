@@ -71,7 +71,7 @@ Ext.define('LE.view.UserButton', {
                     var btn = Ext.create('Ext.button.Button', {
                         glyph: g.get(g[i]),
                         text: g[i] + ' - ' + i,
-                        width: 140,
+                        width: 160,
                         scale: 'large',
                         textAlign: 'left',
                         iconAlign: 'left'
@@ -83,7 +83,7 @@ Ext.define('LE.view.UserButton', {
                 autoShow: true,
                 title:  'glyphs',
                 bodyPadding: 5,
-                width: 500,
+                width: 700,
                 items: btns
             });
         }
