@@ -1,14 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="shortcut icon" href="./images/favicon.ico" />
-	<link rel="stylesheet" href="./css/font-awesome.min.css">
-	<link rel="stylesheet" href="./css/style.css">
+    <title>EmptyProject</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Loan Expert</title>
-    <script type="text/javascript" src="http://localhost/ext-5.1.0/build/ext-all.js"></script>
-    <script type="text/javascript" src="./js/my.js"></script>
-	<script type="text/javascript" src="./js/overrides.js"></script>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+
+    <link rel="shortcut icon" href="./images/favicon.ico"/>
+    <link rel="stylesheet" href="./css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+    <script type="text/javascript">
+        var extJsUrl = 'http://' + location.hostname + '/ext-5.1.0/';
+        var theme = localStorage.theme || 'gray';
+        document.writeln('<link href = "' + extJsUrl + 'build/packages/ext-theme-' + theme + '/build/resources/ext-theme-' + theme + '-all.css" type="text/css" rel="stylesheet" />');
+        document.writeln('<script type="text/javascript" src="' + extJsUrl + 'build/ext-all.js"><\/script>');
+    </script>
+
+    <script type="text/javascript" src="./js/ext-locale-ka_GE.js"></script>
+    <script type="text/javascript" src="./js/functions.js"></script>
+    <script type="text/javascript" src="./js/overrides.js"></script>
     <script type="text/javascript" src="./app.js"></script>
 </head>
 <body>

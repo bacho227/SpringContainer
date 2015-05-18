@@ -1,33 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" href="./css/style.css" type="text/css" />
-	<link rel="shortcut icon" href="./images/favicon.ico" />
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>Loan Expert</title>
-	<script type="text/javascript" src="http://localhost/ext-5.1.0/build/ext-all.js"></script>
-	<script type="text/javascript" src="./js/my.js"></script>
+    <title>EmptyProject</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="cache-control" content="no-cache"/>
+    <meta http-equiv="expires" content="0"/>
+    <meta http-equiv="pragma" content="no-cache"/>
+
+    <link rel="shortcut icon" href="./images/favicon.ico"/>
+
+
+
+    <script type="text/javascript">
+        var extJsUrl = 'http://' + location.hostname + '/ext-5.1.0/';
+        var theme = localStorage.theme || 'gray';
+        document.writeln('<link href = "' + extJsUrl + 'build/packages/ext-theme-' + theme + '/build/resources/ext-theme-' + theme + '-all.css" type="text/css" rel="stylesheet" />');
+        document.writeln('<script type="text/javascript" src="' + extJsUrl + 'build/ext-all.js"><\/script>');
+    </script>
+
+    <script type="text/javascript" src="./js/ext-locale-ka_GE.js"></script>
+    <script type="text/javascript" src="./js/functions.js"></script>
+    <script type="text/javascript" src="./js/overrides.js"></script>
+    <script type="text/javascript">
+        window.isLoginPage = true;
+    </script>
+    <script type="text/javascript" src="./app.js"></script>
 </head>
 <body>
-<form class="login-form" action="rest/security/signIn" method="POST" onsubmit="return login(this);">
-	<table>
-		<tr>
-			<td>Username:</td>
-			<td><input type="text" name="username" required value="test"/></td>
-		</tr>
-		<tr>
-			<td>Password:</td>
-			<td><input type="password" name="password" required value="test"></td>
-		</tr>
-		<tr>
-			<td colspan="2" style="text-align: right;"><input name="submit" type="submit" value="Sign In"></td>
-		</tr>
-	</table>
-</form>
-<script>
-	Ext.onReady(function(){
-		login(Ext.query('form')[0]);
-	});
-</script>
 </body>
 </html>

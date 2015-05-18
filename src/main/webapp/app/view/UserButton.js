@@ -1,76 +1,46 @@
-Ext.define('LE.view.UserButton', {
+Ext.define('MI.view.UserButton', {
     extend: 'Ext.button.Split',
+    glyph: glyphs.get(glyphs.user),
+    text: MI.user.firstName + ' ' + MI.user.lastName,
     constructor: function (cfg) {
         cfg = cfg || {};
         var me = this;
 
-        var langStore = Ext.create('Ext.data.Store', {
-            fields: ['id', 'name'],
-            data: [
-                {id: 'ka', name: 'ქართული'},
-                {id: 'en', name: 'English'}
-            ]
-        });
-
-        var langCombo = Ext.create('Ext.form.field.ComboBox', {
-            fieldLabel: loc.language,
-            name: 'language',
-            labelWidth: 80,
-            //labelAlign: 'right',
-            editable: false,
-            width: 200,
-            value: localStorage.lang || 'ka',
-            store: langStore,
-            queryMode: 'local',
-            displayField: 'name',
-            valueField: 'id',
-            listeners: {
-                change: function(f, val){
-                    changeLang(val);
-                }
-            }
-        });
-
         var themeCombo = Ext.create('Ext.form.field.ComboBox', {
-            fieldLabel: loc.theme,
+            fieldLabel: 'თემა',
             name: 'theme',
             labelWidth: 80,
-            //labelAlign: 'right',
             editable: false,
             width: 200,
-            glyph: g.get(g.brush),
-            value: localStorage.theme || 'neptune',
+            glyph: glyphs.get(glyphs.brush),
+            value: localStorage.theme || 'gray',
             store: ['aria', 'classic', 'crisp', 'crisp-touch', 'gray', 'neptune', 'neptune-touch'],
             listeners: {
-                change: function(f, val){
-                    changeTheme(val);
-                }
+                change: 'changeTheme'
             }
         });
 
-        me.glyph = g.get(g.user);
-
-        me.text = le.user.firstName + ' ' + le.user.lastName;
-        me.menu = [themeCombo, langCombo, {
+        me.menu = [themeCombo, {
             text: 'glyphs',
             handler: openGlyphs,
-            glyph: g.get(g.gears)
+            glyph: glyphs.get(glyphs.gears)
         }, {
             xtype: 'menuseparator'
         }, {
-            text: loc.logout,
-            glyph: g.get(g.logout),
-            handler: logout
+            text: 'გამოსვლა',
+            glyph: glyphs.get(glyphs.logout),
+            href: '/rest/security/signOut'
         }];
+
         me.callParent(arguments);
 
-        function openGlyphs(){
+        function openGlyphs() {
             btns = [];
-            for(var i in g){
-                if(typeof g[i] == 'string'){
+            for (var i in glyphs) {
+                if (typeof glyphs[i] == 'string') {
                     var btn = Ext.create('Ext.button.Button', {
-                        glyph: g.get(g[i]),
-                        text: g[i] + ' - ' + i,
+                        glyph: glyphs.get(glyphs[i]),
+                        text: glyphs[i] + ' - ' + i,
                         width: 160,
                         scale: 'large',
                         textAlign: 'left',
@@ -81,11 +51,12 @@ Ext.define('LE.view.UserButton', {
             }
             Ext.create('Ext.window.Window', {
                 autoShow: true,
-                title:  'glyphs',
+                title: 'glyphs',
                 bodyPadding: 5,
                 width: 700,
                 items: btns
             });
         }
     }
-});
+})
+;
